@@ -7,10 +7,9 @@ import SideBar from "./components/SideBar";
 
 export default function Home() {
   return (
-    <div className="flex flex-row gap-[2.778vw] bg-neutral-600 font-sans  min-h-screen">
+    <div className="flex flex-row gap-[2.778vw] bg-black font-sans  min-h-screen">
       <SideBar />
-
-      <main className="flex flex-col gap-[32px] row-start-2 sm:items-start">
+      <main className="flex flex-col gap-[32px] py-[2.222vw] row-start-2 sm:items-start">
         <DashboardMusisi />
       </main>
     </div>

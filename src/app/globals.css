@@ -13,10 +13,16 @@
   --color-neutral-500: #697586;
   --color-neutral-600: #4B5565;
   --color-neutral-700: #364152;
+  --color-neutral-black-base: #201C22;
+  --color-neutral-black-dark: #0B090B;
+  --color-neutral-black-light: #777777;
+  --color-white-darker: #B6ABBA;
   --color-primary-900: #003A53;
+  --color-purple-base: #552368;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-inter: var(--font-inter);
+  --font-jakarta: var(--font-jakarta);
 }
 
 @media (prefers-color-scheme: dark) {

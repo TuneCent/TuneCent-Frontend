@@ -21,10 +21,15 @@ const SideBar = () => {
   const [activeMenu, setActiveMenu] = useState<string>("Dashboard");
 
   return (
-    <div className="flex flex-col bg-neutral-500 w-[17.222vw] pl-[1.111vw] py-[1.667vw] gap-[2vw]">
+    <div className="flex flex-col bg-neutral-black-base w-[17.222vw] px-[1.111vw] py-[1.667vw] gap-[2vw]">
       <div className="flex flex-row gap-[0.556vw] items-center">
-        <div className="w-[4.167vw] aspect-[60/47] bg-neutral-600"></div>
-        <p className="text-[1.25vw] font-bold text-white">TuneCent</p>
+        <div className="w-[4.167vw] aspect-[60/47] bg-black"></div>
+        <div className="font-jakarta flex flex-col">
+          <p className="text-[1.25vw] font-bold text-white">TuneCent</p>
+          <p className="text-[0.833vw] font-regular text-white">
+            Own your sound
+          </p>
+        </div>
       </div>
       <div className="flex flex-col gap-[0.667vw] w-full">
         {SideBarMenu.map((key) => (
@@ -33,12 +38,12 @@ const SideBar = () => {
             onClick={() => setActiveMenu(key.menu)}
             className={
               activeMenu === key.menu
-                ? `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] bg-neutral-400 rounded-[1.042vw]`
-                : `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] rounded-[1.042vw]`
+                ? `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] bg-purple-base rounded-[0.486vw]`
+                : `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] rounded-[0.486w]`
             }
           >
-            <div className="w-[3.125vw] aspect-[1/1] rounded-full bg-white"></div>
-            <p className="text-[1.25vw] font-bold text-white">{key.menu}</p>
+            <div className="w-[2.75vw] aspect-[1/1]  bg-white"></div>
+            <p className="text-[1vw] font-jakarta text-white">{key.menu}</p>
           </button>
         ))}
       </div>
