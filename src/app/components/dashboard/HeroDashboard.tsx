@@ -1,31 +1,14 @@
 "use client";
-import SearchBar from "../SearchBar";
+// import SearchBar from "../SearchBar";
 import AddressCard from "./AddressCard";
+import ProfileRow from "./ProfileRow";
 import TotalDana from "./TotalDana";
 import AddIcon from "@mui/icons-material/Add";
 
 const HeroDashboard = () => {
   return (
-    <section className="flex flex-col gap-[2.222vw]">
-      <div className="w-full flex flex-row justify-between">
-        <div className="flex flex-row gap-[1.111vw]">
-          <div className="w-[3.65vw] aspect-[1/1] bg-white rounded-full"></div>
-          <div className="flex flex-col gap-[0.111vw]">
-            <div className="flex flex-row gap-[1.111vw] items-center">
-              <p className="font-jakarta text-[#FFFEFF]">Bryan</p>
-              <div className="bg-amber-100 rounded-[0.347vw] bg-linear-to-r from-[#8B609B] to-[#302135]">
-                <p className="text-[0.833vw] p-[0.556vw] font-regular font-jakarta text-white">
-                  Creator
-                </p>
-              </div>
-            </div>
-            <p className="font-jakarta text-white-darker text-[0.833vw]">
-              @bryanputra123
-            </p>
-          </div>
-        </div>
-        <SearchBar />
-      </div>
+    <section className="flex flex-col gap-[2.222vw] w-[75vw] ">
+      <ProfileRow />
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col">
           <p className="text-[2.222vw] font-bold text-white">Hi Bryan!</p>
@@ -69,7 +52,7 @@ const HeroDashboard = () => {
           </button>
         </div>
       </div>
-      <div className="w-full flex flex-row gap-[3.333vw]">
+      <div className="w-full flex flex-row justify-between">
         <TotalDana />
         <div className="flex flex-col gap-[0.667vw]">
           <div className="flex flex-row justify-between items-center">

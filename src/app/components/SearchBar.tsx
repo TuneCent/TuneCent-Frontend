@@ -1,4 +1,4 @@
-import { setServers } from "dns";
+"use client";
 import { ChangeEvent, useState } from "react";
 import { Search } from "react-feather";
 
