@@ -7,22 +7,23 @@ interface SideBarProps {
   id: number;
   menu: string;
   icon: string;
-  onClick: () => void;
+  link: string;
 }
 
 const SideBarMenu: SideBarProps[] = [
-  { id: 1, menu: "Dashboard", icon: "asdks", onClick: () => {} },
-  { id: 2, menu: "Music", icon: "asdks", onClick: () => {} },
-  { id: 3, menu: "Portfolio", icon: "asdks", onClick: () => {} },
-  { id: 4, menu: "Buat Karya", icon: "asdks", onClick: () => {} },
-  { id: 5, menu: "Wallet", icon: "asdks", onClick: () => {} },
+  { id: 1, menu: "Dashboard", icon: "asdks", link: "dashboard" },
+  { id: 2, menu: "Music", icon: "asdks", link: "music" },
+  { id: 3, menu: "Portofolio", icon: "asdks", link: "portofolio" },
+  { id: 4, menu: "Create", icon: "asdks", link: "create" },
+  { id: 5, menu: "Wallet", icon: "asdks", link: "wallet" },
 ];
 
 const SideBar = () => {
   const router = useRouter();
   const [activeMenu, setActiveMenu] = useState<string>("Dashboard");
 
-  const handleClickMenu = (link: string) => {
+  const handleClickMenu = (menu: string, link: string) => {
+    setActiveMenu(menu);
     router.push(`/musician/${link.toLowerCase()}`);
   };
 
@@ -42,7 +43,7 @@ const SideBar = () => {
           <button
             key={key.id}
             onClick={() => {
-              setActiveMenu(key.menu);
+              handleClickMenu(key.menu, key.link);
             }}
             className={
               activeMenu === key.menu

@@ -86,7 +86,7 @@ const Navbar = () => {
               key={menuKey.menuName}
               onClick={() => handleClickMenu(menuKey.link)}
             >
-              <p className="text-white font-jakarta font-regular text-[1.111vw]">
+              <p className="cursor-pointer text-white font-jakarta font-regular text-[1.111vw]">
                 {menuKey.menuName}
               </p>
             </button>

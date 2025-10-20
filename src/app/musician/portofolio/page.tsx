@@ -5,7 +5,6 @@ import PortofolioValue from "@/app/components/portofolio/PortofolioValue";
 const PortofolioPage = () => {
   return (
     <section className="w-[75vw] flex flex-col bg-black gap-[1.667vw]">
-      <ProfileRow />
       <p className="font-jakarta font-bold text-white text-[1.667vw]">
         Your Trending Pool Music
       </p>
