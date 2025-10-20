@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface SideBarProps {
   id: number;
@@ -18,7 +19,12 @@ const SideBarMenu: SideBarProps[] = [
 ];
 
 const SideBar = () => {
+  const router = useRouter();
   const [activeMenu, setActiveMenu] = useState<string>("Dashboard");
+
+  const handleClickMenu = (link: string) => {
+    router.push(`/musician/${link.toLowerCase()}`);
+  };
 
   return (
     <div className="flex flex-col bg-neutral-black-base w-[17.222vw] px-[1.111vw] py-[1.667vw] gap-[2vw]">
@@ -35,7 +41,9 @@ const SideBar = () => {
         {SideBarMenu.map((key) => (
           <button
             key={key.id}
-            onClick={() => setActiveMenu(key.menu)}
+            onClick={() => {
+              setActiveMenu(key.menu);
+            }}
             className={
               activeMenu === key.menu
                 ? `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] bg-purple-base rounded-[0.486vw]`
