@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/landingpage/Hero";
 import SmartContractAudit from "./components/dashboard/SmartContractAudit";
 import TotalDana from "./components/dashboard/TotalDana";
+import Leaderboard from "./components/music/Leaderboard";
+import TopArtist from "./components/landingpage/TopArtist";
 
 export default function Home() {
   return (
@@ -17,21 +19,12 @@ export default function Home() {
       <Navbar />
       <main className="flex flex-col w-[75vw] gap-[5.556vw] py-[2.222vw] row-start-2 sm:items-start">
         <Hero />
+        <MusicPool title="Trending Songs" />
+        <TopArtist />
         <div className="w-full flex flex-row justify-between">
-          <TotalDana />
-          <div className="flex flex-col gap-[0.667vw]">
-            <div className="flex flex-row justify-between items-center">
-              <p className="text-[1.389vw] text-white font-bold">Transaction</p>
-              <p className="text-[0.972vw] text-white-darker font-regular">
-                Lihat Riwayat Payout
-              </p>
-            </div>
-            {[1, 2, 3].map((key: number) => (
-              <AddressCard key={key} />
-            ))}
-          </div>
+          <Leaderboard />
+          <Leaderboard category="Music" />
         </div>
-        <SmartContractAudit />
       </main>
     </div>
   );

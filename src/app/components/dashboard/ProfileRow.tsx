@@ -14,7 +14,7 @@ const ProfileRow = ({
   userRole = "Creator",
 }: ProfileRowProps) => {
   return (
-    <div className="w-full flex flex-row justify-between">
+    <div className="w-full flex flex-row justify-between border-b-[0.069vw] border-[#201C22] pb-[1.111vw]">
       <div className="flex flex-row gap-[1.111vw]">
         <div className="w-[3.65vw] aspect-[1/1] bg-white rounded-full"></div>
         <div className="flex flex-col gap-[0.111vw]">
