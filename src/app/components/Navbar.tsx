@@ -1,12 +1,18 @@
 "use client";
 import { ArrowUpRight } from "react-feather";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 interface WalletProps {
   walletName: string;
   walletIcon?: string;
   walletOnClick: () => void;
+}
+
+interface NavbarMenuProps {
+  menuName: string;
+  link: string;
 }
 
 const Wallet: WalletProps[] = [
@@ -24,12 +30,42 @@ const Wallet: WalletProps[] = [
   },
 ];
 
+const NavbarMenu: NavbarMenuProps[] = [
+  {
+    menuName: "Dashboard",
+    link: "/musician/dashboard",
+  },
+  {
+    menuName: "Music",
+    link: "/musician/music",
+  },
+  {
+    menuName: "Portofolio",
+    link: "/musician/portofolio",
+  },
+  {
+    menuName: "Create",
+    link: "/musician/create",
+  },
+  {
+    menuName: "Wallet",
+    link: "/musician/wallet",
+  },
+];
+
 const Navbar = () => {
+  const router = useRouter();
   const [onClickConnect, setOnClickConnect] = useState<boolean>(false);
 
   const handleClickConnect = () => {
     setOnClickConnect(!onClickConnect);
   };
+
+  const handleClickMenu = (link: string) => {
+    router.push(link);
+  };
+
+  // const handleClickMusic ()
 
   return (
     <div className="relative w-[100vw] h-[6.667vw] flex flex-row justify-center p-[1.667vw]">
@@ -45,32 +81,18 @@ const Navbar = () => {
           </div>
         </div>
         <div className="relative flex flex-row justify-center items-center w-[32.917vw] gap-[1.778vw] aspect-[474/44] rounded-[1.042vw] bg-gradient-to-r from-[#8B609B]/20 to-[#302135]/20">
-          <Link href="">
-            <p className="text-white font-jakarta font-regular text-[1.111vw]">
-              Dashboard
-            </p>
-          </Link>
-          <Link href="">
-            <p className="text-white font-jakarta font-regular text-[1.111vw]">
-              Music
-            </p>
-          </Link>
-          <Link href="">
-            <p className="text-white font-jakarta font-regular text-[1.111vw]">
-              Portofolio
-            </p>
-          </Link>
-          <Link href="">
-            <p className="text-white font-jakarta font-regular text-[1.111vw]">
-              Create
-            </p>
-          </Link>
-          <Link href="">
-            <p className="text-white font-jakarta font-regular text-[1.111vw]">
-              Wallet
-            </p>
-          </Link>
+          {NavbarMenu.map((menuKey) => (
+            <button
+              key={menuKey.menuName}
+              onClick={() => handleClickMenu(menuKey.link)}
+            >
+              <p className="text-white font-jakarta font-regular text-[1.111vw]">
+                {menuKey.menuName}
+              </p>
+            </button>
+          ))}
         </div>
+
         <button
           onClick={handleClickConnect}
           className="cursor-pointer w-[11.25vw] flex flex-row gap-[0.556vw] rounded-[0.556vw] justify-center items-center aspect-[162/40] bg-purple-base"
