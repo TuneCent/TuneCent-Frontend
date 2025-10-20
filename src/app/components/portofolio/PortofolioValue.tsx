@@ -1,7 +1,7 @@
-import DanaChart from "./DanaChart";
+import DanaChart from "../dashboard/DanaChart";
 import { ArrowUp } from "react-feather";
 
-const TotalDana = () => {
+const PortofolioValue = () => {
   return (
     <div className="w-[38.194vw] flex flex-col justify-between bg-black rounded-[1.042vw]p-[1.883vw]">
       <div className="flex flex-col gap-[0.111vw]">
@@ -18,10 +18,10 @@ const TotalDana = () => {
         </div>
       </div>
       <div>
-        <DanaChart />
+        <DanaChart variant="studio" />
       </div>
     </div>
   );
 };
 
-export default TotalDana;
+export default PortofolioValue;
