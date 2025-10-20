@@ -8,7 +8,6 @@ import AddIcon from "@mui/icons-material/Add";
 const HeroDashboard = () => {
   return (
     <section className="flex flex-col gap-[2.222vw] w-[75vw] ">
-      <ProfileRow />
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col">
           <p className="text-[2.222vw] font-bold text-white">Hi Bryan!</p>
