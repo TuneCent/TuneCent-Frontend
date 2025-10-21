@@ -1,16 +1,21 @@
 import { ArrowUpRight } from "react-feather";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import Image from "next/image";
 
 interface ArtistProfileExpandedProps {
   songTitle: string;
   artist: string;
   credit?: string;
+  coverImageUrl?: string;
+  genre?: string;
   onClose: () => void;
 }
 
 const ArtistProfileExpanded = ({
   songTitle,
   artist,
+  coverImageUrl,
+  genre,
   onClose,
 }: ArtistProfileExpandedProps) => {
   return (
@@ -28,7 +33,17 @@ const ArtistProfileExpanded = ({
           <IoIosCloseCircleOutline size={24} color="white" />
         </button>
       </div>
-      <div className="w-full aspect-[380/340] bg-neutral-black-light"></div>
+      <div className="w-full aspect-[380/340] bg-neutral-black-light relative overflow-hidden">
+        {coverImageUrl && (
+          <Image
+            src={coverImageUrl}
+            alt={songTitle}
+            fill
+            className="object-cover"
+            unoptimized
+          />
+        )}
+      </div>
       <div className="w-full flex flex-col gap-[1.111vw]">
         <div className="w-full flex flex-row justify-between items-center">
           <h4 className="text-[1.111vw] text-white font-jakarta font-bold">
@@ -44,7 +59,7 @@ const ArtistProfileExpanded = ({
               {artist}
             </h4>
             <p className="text-[0.833vw] text-white font-jakarta">
-              Main Artist, Creator
+              Main Artist, Creator{genre ? ` • ${genre}` : ''}
             </p>
           </div>
           <ArrowUpRight size={20} color="white" />

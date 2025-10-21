@@ -23,6 +23,7 @@ interface MusicProps {
   musicArtist: string;
   musicUrl: string;
   coverImageUrl?: string;
+  genre?: string;
 }
 
 const DummyMusic: MusicProps[] = [
@@ -101,6 +102,7 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
           musicOnClick: () => {},
           musicUrl: music.audio_file_url,
           coverImageUrl: music.cover_image_url,
+          genre: music.genre,
         }));
 
         setMusicList(transformedMusic);
@@ -121,7 +123,7 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
         audioRef.current.pause();
       }
 
-      const audio = new Audio(activeSong.musicUrl); // tetap valid untuk file lokal
+      const audio = new Audio(activeSong.musicUrl);
       audioRef.current = audio;
 
       audio.addEventListener("loadedmetadata", () => {
@@ -137,7 +139,17 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
         setProgress(0);
       });
 
-      audio.play();
+      audio.addEventListener("error", (e) => {
+        console.error("Audio playback error:", e);
+        console.error("Failed to load audio from:", activeSong.musicUrl);
+        setIsPlaying(false);
+      });
+
+      audio.play().catch((error) => {
+        console.error("Audio play failed:", error);
+        setIsPlaying(false);
+      });
+
       setIsPlaying(true);
 
       return () => {
@@ -219,7 +231,10 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
                   </p>
                 </div>
                 <button
-                  onClick={() => setIsProfileExpanded(true)}
+                  onClick={() => {
+                    setActiveSong(music);
+                    setIsProfileExpanded(true);
+                  }}
                   className="cursor-pointer w-[1.667vw] aspect-[24/24] flex justify-center bg-blackrounded-[1.042vw]"
                 >
                   <RiArrowRightUpLine color="white" size={24} />
@@ -231,10 +246,12 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
       </section>
 
       {/* Tampilkan Detail Artist */}
-      {isProfileExpanded && (
+      {isProfileExpanded && activeSong && (
         <ArtistProfileExpanded
-          songTitle={activeSong ? activeSong.musicTitle : ""}
-          artist={activeSong ? activeSong.musicArtist : ""}
+          songTitle={activeSong.musicTitle}
+          artist={activeSong.musicArtist}
+          coverImageUrl={activeSong.coverImageUrl}
+          genre={activeSong.genre}
           onClose={() => setIsProfileExpanded(false)}
         />
       )}
