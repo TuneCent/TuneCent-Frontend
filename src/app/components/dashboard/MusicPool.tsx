@@ -7,6 +7,7 @@ import { FiSkipBack, FiSkipForward } from "react-icons/fi";
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
 import { FaCirclePlay } from "react-icons/fa6";
 import ArtistProfileExpanded from "./ArtistProfileExpanded";
+import { listMusic, MusicData } from "@/app/services/musicApi";
 
 interface MusicPoolProps {
   title?: string;
@@ -21,6 +22,7 @@ interface MusicProps {
   musicIcon?: string;
   musicArtist: string;
   musicUrl: string;
+  coverImageUrl?: string;
 }
 
 const DummyMusic: MusicProps[] = [
@@ -73,7 +75,45 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
+  const [musicList, setMusicList] = useState<MusicProps[]>(DummyMusic);
+  const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Generate random closing hours
+  const generateRandomCloseHour = () => {
+    const options = [6, 12, 18, 24, 48, 72, 96]; // 6h, 12h, 18h, 1d, 2d, 3d, 4d
+    return options[Math.floor(Math.random() * options.length)];
+  };
+
+  // Fetch music data from backend
+  useEffect(() => {
+    const fetchMusic = async () => {
+      try {
+        setIsLoading(true);
+        const response = await listMusic({ limit: 5 });
+
+        // Transform backend data to match MusicProps interface
+        const transformedMusic: MusicProps[] = response.data.map((music: MusicData) => ({
+          musicId: music.token_id,
+          musicTitle: music.title,
+          musicCloseHour: generateRandomCloseHour(),
+          musicArtist: music.artist,
+          musicOnClick: () => {},
+          musicUrl: music.audio_file_url,
+          coverImageUrl: music.cover_image_url,
+        }));
+
+        setMusicList(transformedMusic);
+      } catch (error) {
+        console.error("Failed to fetch music:", error);
+        // Keep using dummy data if fetch fails
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMusic();
+  }, []);
 
   useEffect(() => {
     if (activeSong) {
@@ -135,6 +175,15 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
 
+  // Format closing hours to display
+  const formatCloseTime = (hours: number) => {
+    if (hours >= 24) {
+      const days = hours / 24;
+      return `${days} hari`;
+    }
+    return `${hours} jam`;
+  };
+
   return (
     <>
       <section className="flex flex-col w-[75vw] gap-[1.111vw]">
@@ -149,7 +198,7 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
         </div>
         <div className="w-full flex flex-row justify-center rounded-[1.042vw] bg-neutral-400 text-white"></div>
         <div className="flex flex-row gap-[2.667vw]">
-          {DummyMusic.map((music) => (
+          {musicList.map((music) => (
             <div
               onClick={music.musicOnClick}
               key={music.musicId}
@@ -158,6 +207,7 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
               <MusicPoolCard
                 isPlayingSong={activeSongId === music.musicId}
                 onClickPlay={() => handleTogglePlay(music)}
+                coverImageUrl={music.coverImageUrl}
               />
               <div className="cursor-pointer flex flex-row justify-between text-start">
                 <div className="flex flex-col gap-[0.333vw]">
@@ -165,7 +215,7 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
                     {music.musicTitle}
                   </p>
                   <p className="text-white font-jakarta text-[0.833vw] font-regular">
-                    Pool tutup: {music.musicCloseHour} jam
+                    Pool tutup: {formatCloseTime(music.musicCloseHour)}
                   </p>
                 </div>
                 <button
