@@ -80,18 +80,18 @@ const Navbar = () => {
             </p>
           </div>
         </div>
-        <div className="relative flex flex-row justify-center items-center w-[32.917vw] gap-[1.778vw] aspect-[474/44] rounded-[1.042vw] bg-gradient-to-r from-[#8B609B]/20 to-[#302135]/20">
-          {NavbarMenu.map((menuKey) => (
-            <button
-              key={menuKey.menuName}
-              onClick={() => handleClickMenu(menuKey.link)}
-            >
-              <p className="cursor-pointer text-white font-jakarta font-regular text-[1.111vw]">
-                {menuKey.menuName}
-              </p>
-            </button>
-          ))}
-        </div>
+        {/* <div className="relative flex flex-row justify-center items-center w-[32.917vw] gap-[1.778vw] aspect-[474/44] rounded-[1.042vw] bg-gradient-to-r from-[#8B609B]/20 to-[#302135]/20">
+            {NavbarMenu.map((menuKey) => (
+              <button
+                key={menuKey.menuName}
+                onClick={() => handleClickMenu(menuKey.link)}
+              >
+                <p className="cursor-pointer text-white font-jakarta font-regular text-[1.111vw]">
+                  {menuKey.menuName}
+                </p>
+              </button>
+            ))}
+          </div> */}
 
         <button
           onClick={handleClickConnect}
