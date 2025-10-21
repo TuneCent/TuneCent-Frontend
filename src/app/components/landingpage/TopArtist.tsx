@@ -68,8 +68,8 @@ const TopArtist = () => {
               </div>
             </div>
             <div className="flex flex-row justify-between">
-              <div className="flex flex-col gap-[0.333vw]">
-                <p className="text-start text-white font-jakarta text-[1.111vw] font-[700]">
+              <div className="flex flex-col gap-[0.333vw] text-start">
+                <p className="text-white font-jakarta text-[1.111vw] font-[700]">
                   {key.artistName}
                 </p>
                 <p className="text-white font-jakarta text-[0.833vw] font-regular">

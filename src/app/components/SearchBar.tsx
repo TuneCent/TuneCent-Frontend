@@ -16,9 +16,9 @@ const SearchBar = ({ onSearch = () => {} }: SearchBarProps) => {
 
   return (
     <div className="w-[36.181vw] aspect-[521/44] flex flex-row items-center gap-[0.889vw] px-[1.333vw] border-[0.069vw] border-[#2B252D] rounded-[0.556vw]">
-      <Search color="white" />
+      <Search color="white" size={20} />
       <input
-        className="w-full text-neutral-black-light border-0 outline-0"
+        className="w-full text-[1.111vw] text-neutral-black-light border-0 outline-0"
         type="text"
         placeholder="Search anything.."
         value={searchTerm}
