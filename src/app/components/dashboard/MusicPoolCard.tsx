@@ -1,7 +1,7 @@
 import { RiArrowRightUpLine } from "@remixicon/react";
 import { useState } from "react";
 import { FaCirclePlay } from "react-icons/fa6";
-import { FaPauseCircle } from "react-icons/fa";
+import { FaPauseCircle, FaSpotify, FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 
 interface MusicPoolCardProps {
@@ -53,8 +53,12 @@ const MusicPoolCard = ({
             />
           )}
           <div className="flex flex-row gap-[0.333vw] p-[0.556vw] relative z-10">
-            <div className="w-[1.875vw] bg-white-darker h-[1.875vw] rounded-full "></div>
-            <div className="w-[1.875vw] bg-white-darker h-[1.875vw] rounded-full "></div>
+            <div className="w-[1.5vw] bg-white h-[1.5vw] rounded-full flex items-center justify-center">
+              <FaSpotify size={18} color="#1DB954" />
+            </div>
+            <div className="w-[1.5vw] bg-white h-[1.5vw] rounded-full flex items-center justify-center">
+              <FaYoutube size={18} color="#FF0000" />
+            </div>
           </div>
         </div>
       </div>
