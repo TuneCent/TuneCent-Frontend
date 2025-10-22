@@ -8,7 +8,7 @@ const UserLayout = ({ children }: { children: React.ReactNode }) => {
       <SideBar variant={"user"} />
       <div className="ml-[17.222vw] w-[calc(100vw-17.222vw)] flex flex-col px-[2.222vw] py-[1.111vw] gap-[1.111vw]">
         <div className="w-full">
-          <ProfileRow />
+          <ProfileRow userRole="User" />
         </div>
         <div className="">{children}</div>
       </div>

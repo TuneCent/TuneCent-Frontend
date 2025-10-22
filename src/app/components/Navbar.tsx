@@ -1,7 +1,17 @@
 "use client";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { usePrivy, useWallets } from '@privy-io/react-auth';
 
 const Navbar = () => {
+  const { ready, authenticated, login, logout, user } = usePrivy();
+  const { wallets } = useWallets();
+
+  // Get the first wallet (primary wallet)
+  const wallet = wallets[0];
+
+  // Format wallet address for display
+  const formatAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
 
   return (
     <div className="relative w-[100vw] h-[6.667vw] flex flex-row justify-center p-[1.667vw]">
@@ -29,7 +39,33 @@ const Navbar = () => {
             ))}
           </div> */}
 
-        <ConnectButton />
+        {/* Privy Login/Logout Button */}
+        {ready && !authenticated ? (
+          <button
+            onClick={login}
+            className="px-[1.5vw] py-[0.5vw] bg-gradient-to-r from-[#8B609B] to-[#302135] rounded-[0.5vw] text-white font-jakarta font-medium text-[0.889vw] hover:opacity-80 transition-opacity"
+          >
+            Connect Wallet
+          </button>
+        ) : ready && authenticated ? (
+          <div className="flex flex-row items-center gap-[0.833vw]">
+            {wallet && (
+              <div className="px-[1vw] py-[0.5vw] bg-gradient-to-r from-[#8B609B]/20 to-[#302135]/20 rounded-[0.5vw] text-white font-jakarta text-[0.778vw]">
+                {formatAddress(wallet.address)}
+              </div>
+            )}
+            <button
+              onClick={logout}
+              className="px-[1.5vw] py-[0.5vw] border border-white/20 rounded-[0.5vw] text-white font-jakarta font-medium text-[0.889vw] hover:bg-white/10 transition-colors"
+            >
+              Disconnect
+            </button>
+          </div>
+        ) : (
+          <div className="px-[1.5vw] py-[0.5vw] bg-gradient-to-r from-[#8B609B]/20 to-[#302135]/20 rounded-[0.5vw] text-white/50 font-jakarta text-[0.889vw]">
+            Loading...
+          </div>
+        )}
       </div>
     </div>
   );

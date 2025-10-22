@@ -1,9 +1,15 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { http } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, base, sepolia } from 'wagmi/chains';
+import { createConfig } from '@privy-io/wagmi';
 
-export const config = getDefaultConfig({
-  appName: 'TuneCent',
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'YOUR_PROJECT_ID',
+export const config = createConfig({
   chains: [mainnet, polygon, optimism, arbitrum, base, sepolia],
-  ssr: true,
+  transports: {
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
+    [optimism.id]: http(),
+    [arbitrum.id]: http(),
+    [base.id]: http(),
+    [sepolia.id]: http(),
+  },
 });

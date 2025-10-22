@@ -5,46 +5,90 @@ import { IoPeopleSharp } from "react-icons/io5";
 import { FaHourglassEnd } from "react-icons/fa";
 import { RiCoinsLine } from "react-icons/ri";
 
-const InvestCard = () => {
+export interface InvestCardProps {
+  musicTitle: string;
+  musicArtist: string;
+  coverImageUrl?: string;
+  fundedPercentage: number;
+  riskLevel: "Low Risk" | "Medium Risk" | "High Risk";
+  investorCount: number;
+  timeRemaining: string;
+  targetListeners: number;
+  genre?: string;
+}
+
+const InvestCard = ({
+  musicTitle,
+  musicArtist,
+  coverImageUrl,
+  fundedPercentage,
+  riskLevel,
+  investorCount,
+  timeRemaining,
+  targetListeners,
+}: InvestCardProps) => {
+  const getRiskColor = (risk: string) => {
+    switch (risk) {
+      case "Low Risk":
+        return "#72FFC7";
+      case "Medium Risk":
+        return "#FFD700";
+      case "High Risk":
+        return "#FF6B6B";
+      default:
+        return "#72FFC7";
+    }
+  };
+
   return (
     <div className="flex flex-row w-full gap-[1.111vw]">
       <div className="w-[13.333vw]">
-        <MusicPoolCard playable={false} />
+        <MusicPoolCard playable={false} coverImageUrl={coverImageUrl} />
       </div>
       <div className="w-full flex flex-col gap-[0.556vw] p-[0.556vw]">
         <div className="flex flex-col gap-[0.222vw]">
           <h5 className="text-[1.111vw] font-jakarta text-white font-bold">
-            Mejikuhibiniu
+            {musicTitle}
           </h5>
           <div className="w-full flex flex-row justify-between">
             <p className="text-[1.111vw] font-jakarta text-white font-regular">
-              Tenxi
+              {musicArtist}
             </p>
             <p className="text-[0.889vw] font-jakarta text-white font-regular">
-              75% terdanai
+              {fundedPercentage}% terdanai
             </p>
           </div>
           <div className="w-full aspect-[1036/11] flex flex-row justify-between bg-black-lighter">
-            <div className="w-[75%] aspect-[1036/11] flex flex-row justify-between bg-purple-lighter"></div>
+            <div
+              className="aspect-[1036/11] flex flex-row justify-between bg-purple-lighter"
+              style={{ width: `${fundedPercentage}%` }}
+            ></div>
           </div>
           <div className="flex flex-row gap-[1.333vw]">
-            <p className="text-[#72FFC7] font-jakarta text-[0.8333vw]">
-              Low Risk
+            <p
+              className="font-jakarta text-[0.8333vw]"
+              style={{ color: getRiskColor(riskLevel) }}
+            >
+              {riskLevel}
             </p>
             <div className="flex flex-row justify-center items-center gap-[0.444vw]">
               <IoPeopleSharp size={16} color="white" />
-              <p className="text-white font-jakarta text-[0.833vw]">45</p>
+              <p className="text-white font-jakarta text-[0.833vw]">
+                {investorCount}
+              </p>
             </div>
             <div className="flex flex-row justify-center items-center gap-[0.444vw]">
               <FaHourglassEnd size={16} color="white" />
-              <p className="text-white font-jakarta text-[0.833vw]">2d 0h</p>
+              <p className="text-white font-jakarta text-[0.833vw]">
+                {timeRemaining}
+              </p>
             </div>
           </div>
         </div>
         <div className="w-full flex flex-row justify-between">
           <div className="flex flex-row items-end gap-[1vw]">
             <h2 className="font-jakarta font-bold text-white text-[2.222vw]">
-              15,000
+              {targetListeners.toLocaleString()}
             </h2>
             <p className="font-jakarta text-white text-[1.111vw] mb-[0.333vw]">
               Listeners
@@ -60,7 +104,7 @@ const InvestCard = () => {
               />
             </div>
             <button className="w-[7.431vw] bg-purple-base flex justify-center items-center rounded-[0.486vw]">
-              <p className="font-inter text-white text-[0.972vw]font-medium">
+              <p className="font-inter text-white text-[0.972vw] font-medium">
                 Invest
               </p>
             </button>
