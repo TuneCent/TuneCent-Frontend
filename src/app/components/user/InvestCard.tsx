@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MusicPoolCard from "../dashboard/MusicPoolCard";
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaHourglassEnd } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { RiCoinsLine } from "react-icons/ri";
 import { useAccount } from "wagmi";
 import { useContributeToCampaign } from "@/app/hooks/useCrowdfundingPool";
 import { formatEther } from "viem";
+import TransactionSuccessModal from "@/app/components/common/TransactionSuccessModal";
 
 export interface InvestCardProps {
   campaignId: number;
@@ -45,6 +46,14 @@ const InvestCard = ({
 
   const [investAmount, setInvestAmount] = useState<string>("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [investmentData, setInvestmentData] = useState<{
+    amount: string;
+    campaignId: number;
+    musicTitle: string;
+    musicArtist: string;
+    royaltyPercentage?: number;
+  } | null>(null);
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
@@ -70,17 +79,35 @@ const InvestCard = ({
       return;
     }
 
+    // Save investment data before transaction
+    setInvestmentData({
+      amount: investAmount,
+      campaignId,
+      musicTitle,
+      musicArtist,
+      royaltyPercentage,
+    });
+
+    // Trigger wallet modal
     contribute(campaignId, investAmount);
   };
 
-  // Show success message when transaction is confirmed
-  if (isConfirmed && !showSuccessMessage) {
-    setShowSuccessMessage(true);
-    setTimeout(() => {
-      setShowSuccessMessage(false);
-      setInvestAmount("");
-    }, 5000);
-  }
+  // Watch for transaction hash - shows modal 3 seconds after user signs in wallet
+  useEffect(() => {
+    if (transactionHash && investmentData) {
+      const timer = setTimeout(() => {
+        setShowSuccessModal(true);
+      }, 3000); // 3 second delay
+
+      return () => clearTimeout(timer);
+    }
+  }, [transactionHash, investmentData]);
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    setInvestAmount("");
+    setInvestmentData(null);
+  };
 
   return (
     <div className="flex flex-row w-full gap-[1.111vw]">
@@ -175,13 +202,6 @@ const InvestCard = ({
               </p>
             )}
 
-            {/* Success Message */}
-            {showSuccessMessage && transactionHash && (
-              <p className="text-green-400 text-[0.722vw]">
-                Investment successful! Tx: {transactionHash.slice(0, 10)}...
-              </p>
-            )}
-
             {/* Error Message */}
             {contributeError && (
               <p className="text-red-400 text-[0.722vw]">
@@ -191,6 +211,53 @@ const InvestCard = ({
           </div>
         </div>
       </div>
+
+      <TransactionSuccessModal
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        transactionHash={transactionHash}
+        title="Investment Successful!"
+      >
+        <div className="space-y-[1.111vw]">
+          <div className="bg-black border border-white-darker rounded-[0.556vw] p-[1.111vw]">
+            <h3 className="font-semibold font-jakarta text-white text-[1.111vw] mb-[0.833vw]">Your Investment</h3>
+            <div className="space-y-[0.556vw]">
+              <div className="flex justify-between">
+                <span className="text-white-darker text-[0.833vw] font-jakarta">Amount:</span>
+                <span className="font-bold text-white text-[0.833vw] font-jakarta">{investmentData?.amount} ETH</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white-darker text-[0.833vw] font-jakarta">Music:</span>
+                <span className="font-medium text-white text-[0.833vw] font-jakarta">{investmentData?.musicTitle}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white-darker text-[0.833vw] font-jakarta">Artist:</span>
+                <span className="font-medium text-white text-[0.833vw] font-jakarta">{investmentData?.musicArtist}</span>
+              </div>
+              {investmentData?.royaltyPercentage && (
+                <div className="flex justify-between">
+                  <span className="text-white-darker text-[0.833vw] font-jakarta">Royalty Share:</span>
+                  <span className="font-medium text-green-400 text-[0.833vw] font-jakarta">
+                    {investmentData.royaltyPercentage / 100}%
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="bg-purple-base bg-opacity-20 border border-purple-lighter rounded-[0.556vw] p-[1.111vw]">
+            <p className="text-[0.833vw] text-white font-jakarta">
+              Your investment has been submitted! You are now a contributor to this music campaign and will receive royalty payments based on the music's performance.
+            </p>
+          </div>
+
+          {coverImageUrl && (
+            <div className="rounded-[0.556vw] overflow-hidden border border-white-darker">
+              <MusicPoolCard playable={false} coverImageUrl={coverImageUrl} />
+            </div>
+          )}
+        </div>
+      </TransactionSuccessModal>
     </div>
   );
 };

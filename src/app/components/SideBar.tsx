@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   RiDashboardLine,
   RiMusic2Line,
@@ -62,7 +63,14 @@ const SideBar = ({ variant = "musician" }: SideBarProps) => {
         onClick={() => router.push("/")}
         className="flex flex-row gap-[0.556vw] items-center cursor-pointer hover:opacity-80 transition-opacity"
       >
-        <div className="w-[4.167vw] aspect-[60/47] bg-black"></div>
+        <div className="w-[4.167vw] aspect-[60/47] relative">
+          <Image
+            src="/assets/logo.png"
+            alt="TuneCent Logo"
+            fill
+            className="object-contain"
+          />
+        </div>
         <div className="font-jakarta flex flex-col">
           <p className="text-[1.25vw] font-bold text-white">TuneCent</p>
           <p className="text-[0.833vw] font-regular text-white">

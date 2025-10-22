@@ -3,6 +3,7 @@ import { useState, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 import { useAccount } from "wagmi";
 import { useMusicRegistry } from "@/app/hooks/useMusicRegistry";
+import TransactionSuccessModal from "@/app/components/common/TransactionSuccessModal";
 
 export default function CreateUploadForm() {
   const { address, isConnected } = useAccount();
@@ -25,6 +26,14 @@ export default function CreateUploadForm() {
   const [audioUrl, setAudioUrl] = useState<string>("");
   const [bannerURL, setBannerURL] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  const [successData, setSuccessData] = useState<{
+    title: string;
+    artist: string;
+    genre: string;
+    audioUrl: string;
+    bannerUrl: string | null;
+  } | null>(null);
 
   // Update creator address when wallet connects
   useEffect(() => {
@@ -97,40 +106,60 @@ export default function CreateUploadForm() {
       // const ipfsCID = await uploadToIPFS(audioFile, bannerFile, metadata);
       const ipfsCID = "QmPlaceholder" + Date.now(); // Placeholder
 
-      // 2. Register music on blockchain
-      await registerMusic(ipfsCID, title, artist, audioArrayBuffer);
+      // Save data before transaction
+      setSuccessData({
+        title,
+        artist,
+        genre,
+        audioUrl,
+        bannerUrl: bannerURL,
+      });
 
-      alert("Music registration initiated! Please wait for confirmation.");
+      // 2. Register music on blockchain - this will open wallet modal
+      registerMusic(ipfsCID, title, artist, audioArrayBuffer);
     } catch (error) {
       console.error("Error creating music:", error);
-      alert("Failed to register music. Please try again.");
-    } finally {
+      // Only show error if user didn't reject in wallet
+      if (error && (error as any).code !== 4001) {
+        alert("Failed to register music. Please try again.");
+      }
       setIsUploading(false);
     }
   };
 
-  // Show success message when confirmed
+  // Watch for transaction hash - shows modal 3 seconds after user signs in wallet
   useEffect(() => {
-    if (isConfirmed && transactionHash) {
-      alert(`Music registered successfully! Transaction: ${transactionHash}`);
-      // Reset form
-      setTitle("");
-      setArtist("");
-      setGenre("");
-      setDescription("");
-      setDuration("");
-      setAudioFile(null);
-      setAudioUrl("");
-      setBannerURL(null);
+    if (transactionHash && successData) {
+      const timer = setTimeout(() => {
+        setShowSuccessModal(true);
+        setIsUploading(false);
+      }, 3000); // 3 second delay
+
+      return () => clearTimeout(timer);
     }
-  }, [isConfirmed, transactionHash]);
+  }, [transactionHash, successData]);
 
   // Show error message
   useEffect(() => {
     if (registerError) {
       alert(`Error: ${registerError.message}`);
+      setIsUploading(false);
     }
   }, [registerError]);
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    // Reset form
+    setTitle("");
+    setArtist("");
+    setGenre("");
+    setDescription("");
+    setDuration("");
+    setAudioFile(null);
+    setAudioUrl("");
+    setBannerURL(null);
+    setSuccessData(null);
+  };
 
   return (
     <div className="w-full flex flex-col items-center gap-[2.222vw]">
@@ -297,6 +326,58 @@ export default function CreateUploadForm() {
           Transaction Hash: {transactionHash}
         </p>
       )}
+
+      <TransactionSuccessModal
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        transactionHash={transactionHash}
+        title="Music Created Successfully!"
+      >
+        <div className="space-y-[1.111vw]">
+          <div className="bg-black border border-white-darker rounded-[0.556vw] p-[1.111vw]">
+            <h3 className="font-semibold font-jakarta text-white text-[1.111vw] mb-[0.833vw]">Music Details</h3>
+            <div className="space-y-[0.556vw]">
+              <div className="flex justify-between">
+                <span className="text-white-darker text-[0.833vw] font-jakarta">Title:</span>
+                <span className="font-medium text-white text-[0.833vw] font-jakarta">{successData?.title}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white-darker text-[0.833vw] font-jakarta">Artist:</span>
+                <span className="font-medium text-white text-[0.833vw] font-jakarta">{successData?.artist}</span>
+              </div>
+              {successData?.genre && (
+                <div className="flex justify-between">
+                  <span className="text-white-darker text-[0.833vw] font-jakarta">Genre:</span>
+                  <span className="font-medium text-white text-[0.833vw] font-jakarta">{successData?.genre}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {successData?.audioUrl && (
+            <div>
+              <p className="text-[0.833vw] text-white-darker font-jakarta mb-[0.556vw]">Preview:</p>
+              <audio
+                controls
+                src={successData.audioUrl}
+                className="w-full rounded-[0.556vw]"
+              />
+            </div>
+          )}
+
+          {successData?.bannerUrl && (
+            <div className="relative w-full h-[8.889vw]">
+              <Image
+                src={successData.bannerUrl}
+                alt="Music Banner"
+                fill
+                className="object-cover rounded-[0.556vw] border border-white-darker"
+                unoptimized
+              />
+            </div>
+          )}
+        </div>
+      </TransactionSuccessModal>
     </div>
   );
 }

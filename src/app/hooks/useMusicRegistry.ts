@@ -14,10 +14,9 @@ export function useMusicRegistry() {
     error: registerError,
   } = useWriteContract();
 
-  // Wait for transaction confirmation
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  // Skip waiting for transaction confirmation (for POC only)
+  const isConfirming = false;
+  const isConfirmed = false;
 
   /**
    * Register a new music piece on-chain
@@ -36,7 +35,7 @@ export function useMusicRegistry() {
     const fingerprintHash = keccak256(new Uint8Array(audioFileBuffer));
 
     // Call smart contract
-    writeContract({
+    return writeContract({
       address: contractAddress,
       abi: MUSIC_REGISTRY_ABI,
       functionName: 'registerMusic',

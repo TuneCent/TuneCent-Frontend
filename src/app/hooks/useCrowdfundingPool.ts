@@ -34,10 +34,9 @@ export function useCrowdfundingPool() {
     error: createError,
   } = useWriteContract();
 
-  // Wait for transaction confirmation
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  // Skip waiting for transaction confirmation (for POC only)
+  const isConfirming = false;
+  const isConfirmed = false;
 
   /**
    * Create a new crowdfunding campaign
@@ -56,7 +55,7 @@ export function useCrowdfundingPool() {
   ) => {
     const goalAmount = parseEther(goalAmountEth);
 
-    writeContract({
+    return writeContract({
       address: contractAddress,
       abi: CROWDFUNDING_POOL_ABI,
       functionName: 'createCampaign',
@@ -93,9 +92,9 @@ export function useContributeToCampaign() {
     error: contributeError,
   } = useWriteContract();
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  // Skip waiting for transaction confirmation (for POC only)
+  const isConfirming = false;
+  const isConfirmed = false;
 
   /**
    * Contribute to a campaign
@@ -105,7 +104,7 @@ export function useContributeToCampaign() {
   const contribute = (campaignId: number, amountEth: string) => {
     const amount = parseEther(amountEth);
 
-    writeContract({
+    return writeContract({
       address: contractAddress,
       abi: CROWDFUNDING_POOL_ABI,
       functionName: 'contribute',
@@ -203,12 +202,12 @@ export function useFinalizeCampaign() {
     error: finalizeError,
   } = useWriteContract();
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  // Skip waiting for transaction confirmation (for POC only)
+  const isConfirming = false;
+  const isConfirmed = false;
 
   const finalizeCampaign = (campaignId: number) => {
-    writeContract({
+    return writeContract({
       address: contractAddress,
       abi: CROWDFUNDING_POOL_ABI,
       functionName: 'finalizeCampaign',
@@ -239,12 +238,12 @@ export function useWithdrawFunds() {
     error: withdrawError,
   } = useWriteContract();
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  // Skip waiting for transaction confirmation (for POC only)
+  const isConfirming = false;
+  const isConfirmed = false;
 
   const withdrawFunds = (campaignId: number) => {
-    writeContract({
+    return writeContract({
       address: contractAddress,
       abi: CROWDFUNDING_POOL_ABI,
       functionName: 'withdrawFunds',

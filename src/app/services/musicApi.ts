@@ -50,13 +50,21 @@ export async function listMusic(params?: ListMusicParams): Promise<MusicListResp
 
   const url = `${API_BASE_URL}/music/?${queryParams.toString()}`;
 
-  const response = await fetch(url);
+  try {
+    const response = await fetch(url, {
+      cache: 'no-store', // Disable caching for fresh data
+    });
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch music: ${response.statusText}`);
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => response.statusText);
+      throw new Error(`Failed to fetch music: ${response.status} - ${errorText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Music API error:', error);
+    throw error;
   }
-
-  return response.json();
 }
 
 /**
