@@ -17,18 +17,8 @@ const Transaction = () => {
   return (
     <div className="flex flex-col w-[31.6vw] aspect-[454/502] p-[1.111vw] bg-neutral-black-dark">
       <h4 className="font-jakarta font-bold text-[1.389vw] text-white">
-        Transaction
+        Withdraw
       </h4>
-      <div className="flex flex-row w-[28.333vw] aspect-[408/27]">
-        <div className="bg-neutral-black-base w-full flex justify-center items-center rounded-l-[0.222vw]">
-          <p className="text-white text-[0.833vw] font-bold text-center">
-            Trade
-          </p>
-        </div>
-        <div className="bg-black w-full flex justify-center items-center rounded-r-[0.556vw]">
-          <p className="text-[0.833vw] font-bold text-white-darker">Exchange</p>
-        </div>
-      </div>
       <div className="flex flex-col gap-[0.444vw]">
         <p className="text-white text-[0.972vw] font-medium">Amount</p>
         <div className="flex flex-row w-full border-[0.056vw] border-white rounded-[0.556vw] bg-black p-[0.778vw]">
@@ -69,7 +59,7 @@ const Transaction = () => {
               Recipient
             </p>
             <p className="text-[0.667vw] font-regular text-white-darker">
-              XXXXXXXX
+              
             </p>
           </div>
           <div className="flex flex-row justify-between">
@@ -77,7 +67,7 @@ const Transaction = () => {
               Account number
             </p>
             <p className="text-[0.667vw] font-regular text-white-darker">
-              XXXXXXXX
+              
             </p>
           </div>
           <div className="flex flex-row justify-between">
@@ -85,13 +75,13 @@ const Transaction = () => {
               Entry Fee
             </p>
             <p className="text-[0.667vw] font-regular text-white-darker">
-              $XXXXXXXX
+              $
             </p>
           </div>
           <div className="flex flex-row justify-between">
             <p className="text-[0.833vw] font-regular text-white-darker">Fee</p>
             <p className="text-[0.667vw] font-regular text-white-darker">
-              XXXXXXXX
+              
             </p>
           </div>
         </div>
