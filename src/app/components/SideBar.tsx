@@ -2,6 +2,18 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  RiDashboardLine,
+  RiMusic2Line,
+  RiFolderMusicLine,
+  RiAddCircleLine,
+  RiWalletLine,
+  RiHome5Line,
+  RiSearchLine,
+  RiLineChartLine,
+  RiSettings3Line,
+  RiLogoutBoxRLine,
+} from "react-icons/ri";
 
 interface SideBarProps {
   variant?: "musician" | "user";
@@ -9,24 +21,24 @@ interface SideBarProps {
 interface SideBarMenuProps {
   id: number;
   menu: string;
-  icon: string;
+  icon: React.ElementType;
   link: string;
 }
 
 const SideBarMenuMusician: SideBarMenuProps[] = [
-  { id: 1, menu: "Dashboard", icon: "asdks", link: "dashboard" },
-  { id: 2, menu: "Music", icon: "asdks", link: "music" },
-  { id: 3, menu: "Portofolio", icon: "asdks", link: "portofolio" },
-  { id: 4, menu: "Create", icon: "asdks", link: "create" },
-  { id: 5, menu: "Wallet", icon: "asdks", link: "wallet" },
+  { id: 1, menu: "Dashboard", icon: RiDashboardLine, link: "dashboard" },
+  { id: 2, menu: "Music", icon: RiMusic2Line, link: "music" },
+  { id: 3, menu: "Portofolio", icon: RiFolderMusicLine, link: "portofolio" },
+  { id: 4, menu: "Create", icon: RiAddCircleLine, link: "create" },
+  { id: 5, menu: "Wallet", icon: RiWalletLine, link: "wallet" },
 ];
 
 const SideBarMenuUser: SideBarMenuProps[] = [
-  { id: 1, menu: "Home", icon: "asdks", link: "home" },
-  { id: 2, menu: "Search", icon: "asdks", link: "search" },
-  { id: 3, menu: "Invest", icon: "asdks", link: "invest" },
-  { id: 4, menu: "Settings", icon: "asdks", link: "settings" },
-  { id: 5, menu: "Sign Out", icon: "asdks", link: "" },
+  { id: 1, menu: "Home", icon: RiHome5Line, link: "home" },
+  { id: 2, menu: "Search", icon: RiSearchLine, link: "search" },
+  { id: 3, menu: "Invest", icon: RiLineChartLine, link: "invest" },
+  { id: 4, menu: "Settings", icon: RiSettings3Line, link: "settings" },
+  { id: 5, menu: "Sign Out", icon: RiLogoutBoxRLine, link: "" },
 ];
 
 const SideBar = ({ variant = "musician" }: SideBarProps) => {
@@ -46,7 +58,10 @@ const SideBar = ({ variant = "musician" }: SideBarProps) => {
 
   return (
     <div className="fixed left-0 top-0 h-screen flex flex-col bg-neutral-black-base w-[17.222vw] px-[1.111vw] py-[1.667vw] gap-[2vw] overflow-y-auto">
-      <div className="flex flex-row gap-[0.556vw] items-center">
+      <button
+        onClick={() => router.push("/")}
+        className="flex flex-row gap-[0.556vw] items-center cursor-pointer hover:opacity-80 transition-opacity"
+      >
         <div className="w-[4.167vw] aspect-[60/47] bg-black"></div>
         <div className="font-jakarta flex flex-col">
           <p className="text-[1.25vw] font-bold text-white">TuneCent</p>
@@ -54,45 +69,51 @@ const SideBar = ({ variant = "musician" }: SideBarProps) => {
             Own your sound
           </p>
         </div>
-      </div>
+      </button>
 
       {variant === "musician" ? (
         <div className="flex flex-col gap-[0.667vw] w-full">
-          {SideBarMenuMusician.map((key) => (
-            <button
-              key={key.id}
-              onClick={() => {
-                handleClickMenu(key.menu, key.link);
-              }}
-              className={
-                activeMenu === key.menu
-                  ? `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] bg-purple-base rounded-[0.486vw]`
-                  : `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] rounded-[0.486w]`
-              }
-            >
-              <div className="w-[2.75vw] aspect-[1/1]  bg-white"></div>
-              <p className="text-[1vw] font-jakarta text-white">{key.menu}</p>
-            </button>
-          ))}
+          {SideBarMenuMusician.map((key) => {
+            const IconComponent = key.icon;
+            return (
+              <button
+                key={key.id}
+                onClick={() => {
+                  handleClickMenu(key.menu, key.link);
+                }}
+                className={
+                  activeMenu === key.menu
+                    ? `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] bg-purple-base rounded-[0.486vw]`
+                    : `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] rounded-[0.486w]`
+                }
+              >
+                <IconComponent className="w-[1.5vw] h-[1.5vw] text-white" />
+                <p className="text-[1vw] font-jakarta text-white">{key.menu}</p>
+              </button>
+            );
+          })}
         </div>
       ) : (
         <div className="flex flex-col gap-[0.667vw] w-full">
-          {SideBarMenuUser.map((key) => (
-            <button
-              key={key.id}
-              onClick={() => {
-                handleClickMenu(key.menu, key.link);
-              }}
-              className={
-                activeMenu === key.menu
-                  ? `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] bg-purple-base rounded-[0.486vw]`
-                  : `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] rounded-[0.486w]`
-              }
-            >
-              <div className="w-[2.75vw] aspect-[1/1]  bg-white"></div>
-              <p className="text-[1vw] font-jakarta text-white">{key.menu}</p>
-            </button>
-          ))}
+          {SideBarMenuUser.map((key) => {
+            const IconComponent = key.icon;
+            return (
+              <button
+                key={key.id}
+                onClick={() => {
+                  handleClickMenu(key.menu, key.link);
+                }}
+                className={
+                  activeMenu === key.menu
+                    ? `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] bg-purple-base rounded-[0.486vw]`
+                    : `cursor-pointer w-full aspect-[228/65] flex flex-row items-center px-[1vw] gap-[1.111vw] rounded-[0.486w]`
+                }
+              >
+                <IconComponent className="w-[1.5vw] h-[1.5vw] text-white" />
+                <p className="text-[1vw] font-jakarta text-white">{key.menu}</p>
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
