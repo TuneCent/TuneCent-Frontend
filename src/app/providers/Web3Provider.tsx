@@ -18,8 +18,9 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
 
         // Embedded wallet configuration
         embeddedWallets: {
-          createOnLogin: 'users-without-wallets', // Auto-create wallets for email/social login users
-          requireUserPasswordOnCreate: false, // Simplify onboarding
+          ethereum: {
+            createOnLogin: 'users-without-wallets',
+          },
         },
 
         // Appearance customization
@@ -32,7 +33,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         },
 
         // Supported wallets for external connections
-        supportedChains: config.chains,
+        supportedChains: [...config.chains],
       }}
     >
       <QueryClientProvider client={queryClient}>
