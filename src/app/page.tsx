@@ -1,15 +1,6 @@
-import Image from "next/image";
 import MusicPool from "./components/dashboard/MusicPool";
-import AddressCard from "./components/dashboard/AddressCard";
-import HeroDashboard from "./components/dashboard/HeroDashboard";
-import DashboardMusisi from "./musician/dashboard/page";
-import SideBar from "./components/SideBar";
-import WalletPage from "./musician/wallet/page";
-import PortofolioPage from "./musician/portofolio/page";
 import Navbar from "./components/Navbar";
 import Hero from "./components/landingpage/Hero";
-import SmartContractAudit from "./components/dashboard/SmartContractAudit";
-import TotalDana from "./components/dashboard/TotalDana";
 import Leaderboard from "./components/music/Leaderboard";
 import TopArtist from "./components/landingpage/TopArtist";
 

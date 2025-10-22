@@ -1,41 +1,7 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-interface NavbarMenuProps {
-  menuName: string;
-  link: string;
-}
-
-const NavbarMenu: NavbarMenuProps[] = [
-  {
-    menuName: "Dashboard",
-    link: "/musician/dashboard",
-  },
-  {
-    menuName: "Music",
-    link: "/musician/music",
-  },
-  {
-    menuName: "Portofolio",
-    link: "/musician/portofolio",
-  },
-  {
-    menuName: "Create",
-    link: "/musician/create",
-  },
-  {
-    menuName: "Wallet",
-    link: "/musician/wallet",
-  },
-];
-
 const Navbar = () => {
-  const router = useRouter();
-
-  const handleClickMenu = (link: string) => {
-    router.push(link);
-  };
 
   return (
     <div className="relative w-[100vw] h-[6.667vw] flex flex-row justify-center p-[1.667vw]">

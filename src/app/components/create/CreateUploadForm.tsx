@@ -1,5 +1,6 @@
 "use client";
 import { useState, ChangeEvent } from "react";
+import Image from "next/image";
 
 export default function CreateUploadForm() {
   const [creatorAddress, setCreatorAddress] = useState<string>("");
@@ -10,7 +11,6 @@ export default function CreateUploadForm() {
   const [duration, setDuration] = useState<string>("");
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [audioUrl, setAudioUrl] = useState<string>("");
-  const [bannerFile, setBannerFile] = useState<File | null>(null);
   const [bannerURL, setBannerURL] = useState<string | null>(null);
 
   const handleCreatorAddress = (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +50,6 @@ export default function CreateUploadForm() {
   const handleBannerUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setBannerFile(file);
       setBannerURL(URL.createObjectURL(file));
     }
   };
@@ -189,11 +188,15 @@ export default function CreateUploadForm() {
               className="cursor-pointer w-[37.5vw] text-[#D3D3D2] font-jakarta text-[0.972vw] border-[0.069vw] border-white p-[0.778vw] rounded-[0.556vw]"
             />
             {bannerURL && (
-              <img
-                src={bannerURL}
-                alt="Music Banner Preview"
-                className="w-[37.5vw] h-[15vw] object-cover rounded-[0.556vw] border-[0.056vw] border-white mt-[0.5vw]"
-              />
+              <div className="relative w-[37.5vw] h-[15vw] mt-[0.5vw]">
+                <Image
+                  src={bannerURL}
+                  alt="Music Banner Preview"
+                  fill
+                  className="object-cover rounded-[0.556vw] border-[0.056vw] border-white"
+                  unoptimized
+                />
+              </div>
             )}
           </div>
         </div>

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import MusicPoolCard from "../dashboard/MusicPoolCard";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import { getTopArtists, ArtistLeaderboardData } from "@/app/services/musicApi";
 import Image from "next/image";
@@ -45,23 +44,21 @@ const DummyArtist: ArtistProps[] = [
   },
 ];
 
+// Array of real musician images from public sources
+const musicianImages = [
+  "https://i.scdn.co/image/ab6761670000ecd4f9b12d75b1acc87fda216bbf", // Artist 1
+  "https://i.scdn.co/image/ab67616d000048517cd329ea4a204a8a47caf3d5", // Artist 2
+  "https://i.scdn.co/image/ab676161000051742017fda314b1745c3e96e0d5", // Artist 3
+  "https://i.scdn.co/image/ab67616d00001e0246f02ffc0922f939ed0fd53f", // Artist 4
+  "https://i.scdn.co/image/ab67616d00001e02d58121433ea3e6c4822ac494", // Artist 5
+];
+
 const TopArtist = () => {
   const [artists, setArtists] = useState<ArtistProps[]>(DummyArtist);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Array of real musician images from public sources
-  const musicianImages = [
-    "https://i.scdn.co/image/ab6761670000ecd4f9b12d75b1acc87fda216bbf", // Artist 1
-    "https://i.scdn.co/image/ab67616d000048517cd329ea4a204a8a47caf3d5", // Artist 2
-    "https://i.scdn.co/image/ab676161000051742017fda314b1745c3e96e0d5", // Artist 3
-    "https://i.scdn.co/image/ab67616d00001e0246f02ffc0922f939ed0fd53f", // Artist 4
-    "https://i.scdn.co/image/ab67616d00001e02d58121433ea3e6c4822ac494", // Artist 5
-  ];
 
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        setIsLoading(true);
         const response = await getTopArtists({ limit: 5 });
 
         if (response.leaderboard.length > 0) {
@@ -91,8 +88,6 @@ const TopArtist = () => {
           artistProfileIcon: musicianImages[index % musicianImages.length],
         }));
         setArtists(dummyWithImages);
-      } finally {
-        setIsLoading(false);
       }
     };
 

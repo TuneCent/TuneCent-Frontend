@@ -1,8 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-// import SearchBar from "../SearchBar";
 import AddressCard from "./AddressCard";
-import ProfileRow from "./ProfileRow";
 import TotalDana from "./TotalDana";
 import AddIcon from "@mui/icons-material/Add";
 

@@ -1,5 +1,3 @@
-import ProfileRow from "@/app/components/dashboard/ProfileRow";
-import TotalDana from "@/app/components/dashboard/TotalDana";
 import HeroTransaction from "@/app/components/wallet/HeroTransaction";
 
 const WalletPage = () => {

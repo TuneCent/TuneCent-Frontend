@@ -3,7 +3,6 @@ import { useState, ChangeEvent } from "react";
 import { BsChevronDown, BsArrowDownUp } from "react-icons/bs";
 
 const Transaction = () => {
-  const [isTrade, setIsTrade] = useState<boolean>(true);
   const [amount, setAmount] = useState("");
   const [receive, setReceive] = useState("");
 

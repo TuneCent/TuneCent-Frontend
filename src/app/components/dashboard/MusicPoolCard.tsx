@@ -1,4 +1,3 @@
-import { RiArrowRightUpLine } from "@remixicon/react";
 import { useState } from "react";
 import { FaCirclePlay } from "react-icons/fa6";
 import { FaPauseCircle, FaSpotify, FaYoutube } from "react-icons/fa";

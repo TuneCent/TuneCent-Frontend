@@ -5,7 +5,6 @@ import MusicPoolCard from "./MusicPoolCard";
 import { RiArrowRightUpLine } from "@remixicon/react";
 import { FiSkipBack, FiSkipForward } from "react-icons/fi";
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
-import { FaCirclePlay } from "react-icons/fa6";
 import ArtistProfileExpanded from "./ArtistProfileExpanded";
 import { listMusic, MusicData } from "@/app/services/musicApi";
 
@@ -87,7 +86,6 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
   const [duration, setDuration] = useState(0);
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
   const [musicList, setMusicList] = useState<MusicProps[]>(DummyMusic);
-  const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Generate random closing hours
@@ -100,7 +98,6 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
   useEffect(() => {
     const fetchMusic = async () => {
       try {
-        setIsLoading(true);
         const response = await listMusic({ limit: 5 });
 
         // Transform backend data to match MusicProps interface
@@ -121,8 +118,6 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
       } catch (error) {
         console.error("Failed to fetch music:", error);
         // Keep using dummy data if fetch fails
-      } finally {
-        setIsLoading(false);
       }
     };
 

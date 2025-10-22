@@ -1,4 +1,3 @@
-import ProfileRow from "@/app/components/dashboard/ProfileRow";
 import NFTList from "@/app/components/portofolio/NFTList";
 import PortofolioValue from "@/app/components/portofolio/PortofolioValue";
 

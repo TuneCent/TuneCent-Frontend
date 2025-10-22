@@ -24,7 +24,7 @@ const UserSearchPage = () => {
       {searchQuery ? (
         <div className="flex flex-col gap-[2.222vw]">
           <p className="text-white font-jakarta text-[1.111vw]">
-            Search results for "{searchQuery}"
+            Search results for &quot;{searchQuery}&quot;
           </p>
           <MusicPool title="Songs" />
           <TopArtist />

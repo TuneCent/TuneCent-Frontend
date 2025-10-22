@@ -1,7 +1,5 @@
 "use client";
-import { RiArrowRightLine } from "react-icons/ri";
 import Image from "next/image";
-
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
