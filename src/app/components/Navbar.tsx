@@ -1,8 +1,9 @@
 "use client";
 import { usePrivy, useWallets } from '@privy-io/react-auth';
+import Image from 'next/image';
 
 const Navbar = () => {
-  const { ready, authenticated, login, logout, user } = usePrivy();
+  const { ready, authenticated, login, logout } = usePrivy();
   const { wallets } = useWallets();
 
   // Get the first wallet (primary wallet)
@@ -17,9 +18,11 @@ const Navbar = () => {
     <div className="fixed top-0 left-0 w-[100vw] h-[6.667vw] flex flex-row justify-center p-[1.667vw] bg-[#0A0A0A] z-50">
       <div className="w-[80vw] flex flex-row justify-between">
         <div className="flex flex-row items-center gap-[0.833vw]">
-          <img
+          <Image
             src="/assets/logo.png"
             alt="TuneCent Logo"
+            width={64}
+            height={64}
             className="w-[3.333vw] h-[3.333vw] object-contain"
           />
           <div className="flex flex-col gap-[0.222vw] text-white">

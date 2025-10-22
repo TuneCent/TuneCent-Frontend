@@ -247,7 +247,7 @@ const InvestCard = ({
 
           <div className="bg-purple-base bg-opacity-20 border border-purple-lighter rounded-[0.556vw] p-[1.111vw]">
             <p className="text-[0.833vw] text-white font-jakarta">
-              Your investment has been submitted! You are now a contributor to this music campaign and will receive royalty payments based on the music's performance.
+              Your investment has been submitted! You are now a contributor to this music campaign and will receive royalty payments based on the music&apos;s performance.
             </p>
           </div>
 

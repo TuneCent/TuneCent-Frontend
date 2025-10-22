@@ -17,6 +17,7 @@ const contributorPathData: ContributorPathProps = {
 // Mock data for investment opportunities - similar to MusicPool DummyMusic
 const InvestmentOpportunities: InvestCardProps[] = [
   {
+    campaignId: 1,
     musicTitle: "Mejikuhibiniu",
     musicArtist: "Tenxi",
     coverImageUrl: "https://i.scdn.co/image/ab67616d00001e024d265eb3c717ab45470fdc8c",
@@ -28,6 +29,7 @@ const InvestmentOpportunities: InvestCardProps[] = [
     genre: "Indie Pop",
   },
   {
+    campaignId: 2,
     musicTitle: "Pikiran yang matang",
     musicArtist: "Perunggu",
     coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0292aaadd0be503d89c082ecbb",
@@ -39,6 +41,7 @@ const InvestmentOpportunities: InvestCardProps[] = [
     genre: "Alternative Rock",
   },
   {
+    campaignId: 3,
     musicTitle: "Alamak",
     musicArtist: "Rizky Febian, Adrian Khalif",
     coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0201b9750a33d771645d7f043a",
@@ -50,6 +53,7 @@ const InvestmentOpportunities: InvestCardProps[] = [
     genre: "Pop",
   },
   {
+    campaignId: 4,
     musicTitle: "kids",
     musicArtist: "Hindia",
     coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0205898628baab6ef07a0a4d03",

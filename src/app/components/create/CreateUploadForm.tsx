@@ -120,7 +120,7 @@ export default function CreateUploadForm() {
     } catch (error) {
       console.error("Error creating music:", error);
       // Only show error if user didn't reject in wallet
-      if (error && (error as any).code !== 4001) {
+      if (error && typeof error === 'object' && 'code' in error && error.code !== 4001) {
         alert("Failed to register music. Please try again.");
       }
       setIsUploading(false);
