@@ -94,16 +94,18 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
         const response = await listMusic({ limit: 5 });
 
         // Transform backend data to match MusicProps interface
-        const transformedMusic: MusicProps[] = response.data.map((music: MusicData) => ({
-          musicId: music.token_id,
-          musicTitle: music.title,
-          musicCloseHour: generateRandomCloseHour(),
-          musicArtist: music.artist,
-          musicOnClick: () => {},
-          musicUrl: music.audio_file_url,
-          coverImageUrl: music.cover_image_url,
-          genre: music.genre,
-        }));
+        const transformedMusic: MusicProps[] = response.data.map(
+          (music: MusicData) => ({
+            musicId: music.token_id,
+            musicTitle: music.title,
+            musicCloseHour: generateRandomCloseHour(),
+            musicArtist: music.artist,
+            musicOnClick: () => {},
+            musicUrl: music.audio_file_url,
+            coverImageUrl: music.cover_image_url,
+            genre: music.genre,
+          })
+        );
 
         setMusicList(transformedMusic);
       } catch (error) {
@@ -258,7 +260,7 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
 
       {/* Tampilkan bar lagu di bawah layar */}
       {activeSong && (
-        <div className="fixed z-[10] bottom-0 left-0 w-full aspect-[1440/96] bg-black border-t border-neutral-700 px-[2vw] flex flex-row justify-between items-center">
+        <div className="fixed z-[20] bottom-0 left-0 w-full aspect-[1440/96] bg-black border-t border-neutral-700 px-[2vw] flex flex-row justify-between items-center">
           <div className="w-full flex flex-row justify-between items-center">
             <div className="w-[18.472vw] flex flex-row gap-[1.111vw] items-center">
               <div className="w-[3.75vw] aspect-[1/1] bg-neutral-black-base"></div>

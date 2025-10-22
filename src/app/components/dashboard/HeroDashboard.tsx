@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 // import SearchBar from "../SearchBar";
 import AddressCard from "./AddressCard";
 import ProfileRow from "./ProfileRow";
@@ -6,6 +7,8 @@ import TotalDana from "./TotalDana";
 import AddIcon from "@mui/icons-material/Add";
 
 const HeroDashboard = () => {
+  const router = useRouter();
+
   return (
     <section className="flex flex-col gap-[2.222vw] w-[75vw] ">
       <div className="flex flex-row justify-between items-center">
@@ -17,7 +20,9 @@ const HeroDashboard = () => {
         </div>
         <div className="flex flex-row gap-[1.111vw]">
           <button
-            onClick={() => {}}
+            onClick={() => {
+              router.push("/musician/create");
+            }}
             className="w-fit aspect-[110/40] flex flex-row justify-center items-center gap-[0.556vw] bg-purple-base rounded-[1.042vw] text-white p-[0.889vw]"
           >
             <AddIcon sx={{ color: "#FFFFFF" }} />
@@ -26,7 +31,9 @@ const HeroDashboard = () => {
             </p>
           </button>
           <button
-            onClick={() => {}}
+            onClick={() => {
+              router.push("/musician/music");
+            }}
             className="w-fit aspect-[231/40] flex flex-row justify-center items-center gap-[0.556vw] bg-purple-base rounded-[1.042vw] text-white p-[0.889vw]"
           >
             <svg

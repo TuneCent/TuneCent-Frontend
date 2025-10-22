@@ -4,10 +4,11 @@ interface LeaderboardArrayProps {
   rank: number;
   artist: string;
   score: string;
-  isYourProfile: boolean;
+  isYourProfile?: boolean;
+  isTopProfile?: boolean;
 }
 
-const LeaderboardArray: LeaderboardArrayProps[] = [
+const LeaderboardMusisiArray: LeaderboardArrayProps[] = [
   {
     rank: 49,
     artist: "Juicy Luicy",
@@ -34,8 +35,62 @@ const LeaderboardArray: LeaderboardArrayProps[] = [
   },
 ];
 
+const LeaderboardArtistArray: LeaderboardArrayProps[] = [
+  {
+    rank: 1,
+    artist: "NIKI",
+    score: "9.812",
+    isTopProfile: true,
+  },
+  {
+    rank: 2,
+    artist: "Tenxi",
+    score: "9.700",
+    isTopProfile: false,
+  },
+  {
+    rank: 3,
+    artist: "Hindia",
+    score: "9.650",
+    isTopProfile: false,
+  },
+  {
+    rank: 4,
+    artist: "Rizky Febian",
+    score: "9.600",
+    isTopProfile: false,
+  },
+];
+
+const LeaderboardMusicArray: LeaderboardArrayProps[] = [
+  {
+    rank: 1,
+    artist: "Mejikuhibiniu",
+    score: "9.812",
+    isTopProfile: true,
+  },
+  {
+    rank: 2,
+    artist: "Rasakan Nikmatnya Hidup",
+    score: "9.700",
+    isTopProfile: false,
+  },
+  {
+    rank: 3,
+    artist: "Pikiran Yang Matang",
+    score: "9.650",
+    isTopProfile: false,
+  },
+  {
+    rank: 4,
+    artist: "Kau Pemeran Utama di Sebuah Opera",
+    score: "9.600",
+    isTopProfile: false,
+  },
+];
+
 interface LeaderboardProps {
-  category?: "Artist" | "Music";
+  category?: "Artist" | "Music" | "Musician";
 }
 
 const Leaderboard = ({ category = "Artist" }: LeaderboardProps) => {
@@ -52,47 +107,123 @@ const Leaderboard = ({ category = "Artist" }: LeaderboardProps) => {
           Show All
         </button>
       </div>
-      <div className="flex flex-col w-full aspect-[481/180] p-[0.333vw] gap-[0.333vw]">
-        {LeaderboardArray.map((leaderboardKey) => (
-          <div
-            key={leaderboardKey.rank}
-            className="w-full flex flex-row justify-between p-[0.222vw]"
-          >
-            {leaderboardKey.isYourProfile ? (
-              <div className="w-full flex flex-row justify-between items-center">
-                <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
-                  <p className="text-[1.667vw] font-bold">
-                    {leaderboardKey.rank}
-                  </p>
-                  <div className="flex flex-col gap-[0.111vw]">
-                    <p className="text-[1.389vw] font-bold">
-                      {leaderboardKey.artist}
+      {category === "Musician" ? (
+        <div className="flex flex-col w-full aspect-[481/180] p-[0.333vw] gap-[0.333vw]">
+          {LeaderboardMusisiArray.map((leaderboardKey) => (
+            <div
+              key={leaderboardKey.rank}
+              className="w-full flex flex-row justify-between p-[0.222vw]"
+            >
+              {leaderboardKey.isYourProfile ? (
+                <div className="w-full flex flex-row justify-between items-center">
+                  <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
+                    <p className="text-[1.667vw] font-bold">
+                      {leaderboardKey.rank}
                     </p>
+                    <div className="flex flex-col gap-[0.111vw]">
+                      <p className="text-[1.389vw] font-bold">
+                        {leaderboardKey.artist}
+                      </p>
+                      <p className="text-[0.833vw]">
+                        score: {leaderboardKey.score}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="w-[3.889vw] aspect-[56/24] bg-linear-to-r from-[#8B609B] to-[#302135] flex justify-center items-center rounded-[0.347vw] p-[0.333vw]">
+                    <p className="text-white font-jakarta text-[0.833vw] text-center">
+                      You
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
+                  <p className="text-[0.833vw]">{leaderboardKey.rank}</p>
+                  <div className="flex flex-col gap-[0.111vw]">
+                    <p className="text-[0.972vw]">{leaderboardKey.artist}</p>
                     <p className="text-[0.833vw]">
                       score: {leaderboardKey.score}
                     </p>
                   </div>
                 </div>
-                <div className="w-[3.889vw] aspect-[56/24] bg-linear-to-r from-[#8B609B] to-[#302135] flex justify-center items-center rounded-[0.347vw] p-[0.333vw]">
-                  <p className="text-white font-jakarta text-[0.833vw] text-center">
-                    You
-                  </p>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : category === "Artist" ? (
+        <div className="flex flex-col w-full aspect-[481/180] p-[0.333vw] gap-[0.333vw]">
+          {LeaderboardArtistArray.map((leaderboardKey) => (
+            <div
+              key={leaderboardKey.rank}
+              className="w-full flex flex-row justify-between p-[0.222vw]"
+            >
+              {leaderboardKey.isTopProfile ? (
+                <div className="w-full flex flex-row justify-between items-center">
+                  <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
+                    <p className="text-[1.667vw] font-bold">
+                      {leaderboardKey.rank}
+                    </p>
+                    <div className="flex flex-col gap-[0.111vw]">
+                      <p className="text-[1.389vw] font-bold">
+                        {leaderboardKey.artist}
+                      </p>
+                      <p className="text-[0.833vw]">
+                        score: {leaderboardKey.score}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
-                <p className="text-[0.833vw]">{leaderboardKey.rank}</p>
-                <div className="flex flex-col gap-[0.111vw]">
-                  <p className="text-[0.972vw]">{leaderboardKey.artist}</p>
-                  <p className="text-[0.833vw]">
-                    score: {leaderboardKey.score}
-                  </p>
+              ) : (
+                <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
+                  <p className="text-[0.833vw]">{leaderboardKey.rank}</p>
+                  <div className="flex flex-col gap-[0.111vw]">
+                    <p className="text-[0.972vw]">{leaderboardKey.artist}</p>
+                    <p className="text-[0.833vw]">
+                      score: {leaderboardKey.score}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col w-full aspect-[481/180] p-[0.333vw] gap-[0.333vw]">
+          {LeaderboardMusicArray.map((leaderboardKey) => (
+            <div
+              key={leaderboardKey.rank}
+              className="w-full flex flex-row justify-between p-[0.222vw]"
+            >
+              {leaderboardKey.isTopProfile ? (
+                <div className="w-full flex flex-row justify-between items-center">
+                  <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
+                    <p className="text-[1.667vw] font-bold">
+                      {leaderboardKey.rank}
+                    </p>
+                    <div className="flex flex-col gap-[0.111vw]">
+                      <p className="text-[1.389vw] font-bold">
+                        {leaderboardKey.artist}
+                      </p>
+                      <p className="text-[0.833vw]">
+                        score: {leaderboardKey.score}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
+                  <p className="text-[0.833vw]">{leaderboardKey.rank}</p>
+                  <div className="flex flex-col gap-[0.111vw]">
+                    <p className="text-[0.972vw]">{leaderboardKey.artist}</p>
+                    <p className="text-[0.833vw]">
+                      score: {leaderboardKey.score}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
