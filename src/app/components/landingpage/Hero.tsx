@@ -2,7 +2,11 @@
 import { RiArrowRightLine } from "react-icons/ri";
 import Image from "next/image";
 
+import { useRouter } from "next/navigation";
+
 const Hero = () => {
+  const router = useRouter();
+
   return (
     <section className="w-full flex flex-col gap-[1.528vw] justify-center items-center relative">
       {/* Background decorative element from Figma */}
@@ -29,19 +33,26 @@ const Hero = () => {
         <br />
         Just you and your listeners on chain
       </p>
-      <div className="flex flex-row gap-[1.111vw] mt-[1.528vw] relative z-10">
+      <div className="w-[60vw] flex flex-row justify-center gap-[1.111vw]">
         <button
-          onClick={() => {}}
-          className="flex items-center justify-center w-[16.25vw] h-[3.333vw] bg-[#552368] hover:bg-[#6b2d82] transition-colors rounded-[0.556vw] text-white font-jakarta font-medium text-[1.111vw]"
+          onClick={() => {
+            router.push("/user/home");
+          }}
+          className="cursor-pointer w-[16.25vw] flex flex-row aspect-[492/48] justify-center items-center rounded-[0.556vw] bg-transparent border-[0.069vw] border-purple-base p-[1.111vw]"
         >
-          Discover Music
+          <p className="text-[0.972vw] text-white font-jakarta text-white-lighter">
+            Discover Music
+          </p>
         </button>
         <button
-          onClick={() => {}}
-          className="flex items-center justify-center gap-[0.556vw] w-[16.25vw] h-[3.333vw] bg-[#552368] hover:bg-[#6b2d82] transition-colors rounded-[0.556vw] text-white font-jakarta font-medium text-[1.111vw]"
+          onClick={() => {
+            router.push("/musician/dashboard");
+          }}
+          className="cursor-pointer w-[16.25vw] flex flex-row aspect-[408/36] justify-center items-center rounded-[0.556vw] bg-purple-base p-[1.111vw]"
         >
-          Earn your Cent
-          <RiArrowRightLine size={20} />
+          <p className="text-[0.972vw] text-white font-jakarta text-white-lighter">
+            Earn Your Cent
+          </p>
         </button>
       </div>
     </section>
