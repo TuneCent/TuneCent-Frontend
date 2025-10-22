@@ -27,7 +27,7 @@ export function Web3Provider({ children }: { children: React.ReactNode }) {
         appearance: {
           theme: 'dark',
           accentColor: '#10b981', // Green accent color matching TuneCent theme
-          logo: '/logo.png', // You can add your logo to public folder
+          logo: '/assets/logo.png',
           landingHeader: 'Welcome to TuneCent',
           loginMessage: 'Connect your wallet or sign in to get started',
         },

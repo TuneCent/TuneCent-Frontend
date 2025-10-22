@@ -14,9 +14,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative w-[100vw] h-[6.667vw] flex flex-row justify-center p-[1.667vw]">
+    <div className="fixed top-0 left-0 w-[100vw] h-[6.667vw] flex flex-row justify-center p-[1.667vw] bg-[#0A0A0A] z-50">
       <div className="w-[80vw] flex flex-row justify-between">
-        <div className="flex flex-row">
+        <div className="flex flex-row items-center gap-[0.833vw]">
+          <img
+            src="/assets/logo.png"
+            alt="TuneCent Logo"
+            className="w-[3.333vw] h-[3.333vw] object-contain"
+          />
           <div className="flex flex-col gap-[0.222vw] text-white">
             <p className="font-jakarta font-bold text-[1.111vw] text-white">
               TuneCent
