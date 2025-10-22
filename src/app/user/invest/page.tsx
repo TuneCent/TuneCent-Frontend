@@ -1,5 +1,10 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import ContributorPath, { ContributorPathProps } from "@/app/components/user/ContributorPath";
 import InvestCard, { InvestCardProps } from "@/app/components/user/InvestCard";
+import { useGetTotalCampaigns, useGetCampaign, CampaignStatus } from "@/app/hooks/useCrowdfundingPool";
+import { listMusic, MusicData } from "@/app/services/musicApi";
 
 // Mock data for contributor path
 const contributorPathData: ContributorPathProps = {
@@ -58,6 +63,46 @@ const InvestmentOpportunities: InvestCardProps[] = [
 ];
 
 const InvestPage = () => {
+  const { totalCampaigns } = useGetTotalCampaigns();
+  const [campaigns, setCampaigns] = useState<InvestCardProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      if (!totalCampaigns || totalCampaigns === 0) {
+        // If no campaigns, show mock data for demo
+        setCampaigns(InvestmentOpportunities.map((inv, i) => ({ ...inv, campaignId: i + 1 })));
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        // Fetch all music data first
+        const musicResponse = await listMusic({ limit: 100 });
+        const musicMap = new Map(
+          musicResponse.data.map((music) => [music.token_id, music])
+        );
+
+        // For now, show mock data with campaign IDs
+        // TODO: Implement proper campaign fetching using useGetCampaign hook for each campaign
+        const campaignsWithIds = InvestmentOpportunities.slice(0, totalCampaigns).map((inv, i) => ({
+          ...inv,
+          campaignId: i + 1,
+        }));
+
+        setCampaigns(campaignsWithIds);
+      } catch (error) {
+        console.error("Error fetching campaigns:", error);
+        // Fallback to mock data
+        setCampaigns(InvestmentOpportunities.map((inv, i) => ({ ...inv, campaignId: i + 1 })));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCampaigns();
+  }, [totalCampaigns]);
+
   return (
     <section className="w-[75vw] flex flex-col bg-black gap-[1.667vw]">
       <div className="w-full flex flex-row justify-between">
@@ -70,9 +115,20 @@ const InvestPage = () => {
         <p className="font-jakarta font-bold text-white text-[1.389vw]">
           Special Offer for you
         </p>
-        {InvestmentOpportunities.map((investment, index) => (
-          <InvestCard key={index} {...investment} />
-        ))}
+
+        {isLoading ? (
+          <p className="text-white text-center py-[2vw]">Loading campaigns...</p>
+        ) : campaigns.length > 0 ? (
+          campaigns.map((campaign) => <InvestCard key={campaign.campaignId} {...campaign} />)
+        ) : (
+          <div className="text-center py-[2vw]">
+            <p className="text-white text-[1.111vw]">No active campaigns available</p>
+            <p className="text-white-darker text-[0.833vw] mt-[0.556vw]">
+              Check back later for new investment opportunities
+            </p>
+          </div>
+        )}
+
         <div className="flex flex-row justify-between"></div>
       </div>
     </section>

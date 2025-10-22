@@ -7,9 +7,9 @@ export default function DashboardMusisi() {
     <section className="flex flex-col w-[75vw] gap-[2.222vw]">
       <HeroDashboard />
 
-      <MusicPool />
+      <MusicPool showCampaignButton={true} />
 
-      <MusicPool title="Pool yang didanai" />
+      <MusicPool title="Pool yang didanai" showCampaignButton={true} />
       <SmartContractAudit isLanding={false} />
     </section>
   );

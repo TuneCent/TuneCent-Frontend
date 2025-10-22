@@ -1,8 +1,20 @@
 "use client";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
+import { useAccount } from "wagmi";
+import { useMusicRegistry } from "@/app/hooks/useMusicRegistry";
 
 export default function CreateUploadForm() {
+  const { address, isConnected } = useAccount();
+  const {
+    registerMusic,
+    isRegistering,
+    isConfirming,
+    isConfirmed,
+    registerError,
+    transactionHash,
+  } = useMusicRegistry();
+
   const [creatorAddress, setCreatorAddress] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [artist, setArtist] = useState<string>("");
@@ -12,6 +24,14 @@ export default function CreateUploadForm() {
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [audioUrl, setAudioUrl] = useState<string>("");
   const [bannerURL, setBannerURL] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+
+  // Update creator address when wallet connects
+  useEffect(() => {
+    if (address) {
+      setCreatorAddress(address);
+    }
+  }, [address]);
 
   const handleCreatorAddress = (event: ChangeEvent<HTMLInputElement>) => {
     setCreatorAddress(event.target.value);
@@ -54,8 +74,63 @@ export default function CreateUploadForm() {
     }
   };
 
-  const handleCreateKarya = () => {};
-  //   const;
+  const handleCreateKarya = async () => {
+    // Validation
+    if (!isConnected) {
+      alert("Please connect your wallet first");
+      return;
+    }
+
+    if (!title || !artist || !audioFile) {
+      alert("Please fill in all required fields (Title, Artist, and Audio File)");
+      return;
+    }
+
+    try {
+      setIsUploading(true);
+
+      // 1. Upload audio file to IPFS (you'll need to implement this)
+      // For now, using a placeholder IPFS CID
+      const audioArrayBuffer = await audioFile.arrayBuffer();
+
+      // TODO: Upload to actual IPFS
+      // const ipfsCID = await uploadToIPFS(audioFile, bannerFile, metadata);
+      const ipfsCID = "QmPlaceholder" + Date.now(); // Placeholder
+
+      // 2. Register music on blockchain
+      await registerMusic(ipfsCID, title, artist, audioArrayBuffer);
+
+      alert("Music registration initiated! Please wait for confirmation.");
+    } catch (error) {
+      console.error("Error creating music:", error);
+      alert("Failed to register music. Please try again.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  // Show success message when confirmed
+  useEffect(() => {
+    if (isConfirmed && transactionHash) {
+      alert(`Music registered successfully! Transaction: ${transactionHash}`);
+      // Reset form
+      setTitle("");
+      setArtist("");
+      setGenre("");
+      setDescription("");
+      setDuration("");
+      setAudioFile(null);
+      setAudioUrl("");
+      setBannerURL(null);
+    }
+  }, [isConfirmed, transactionHash]);
+
+  // Show error message
+  useEffect(() => {
+    if (registerError) {
+      alert(`Error: ${registerError.message}`);
+    }
+  }, [registerError]);
 
   return (
     <div className="w-full flex flex-col items-center gap-[2.222vw]">
@@ -203,12 +278,25 @@ export default function CreateUploadForm() {
       </div>
       <button
         onClick={handleCreateKarya}
-        className="cursor-pointer w-[37.5vw] flex flex-row aspect-[408/36] justify-center items-center rounded-[0.556vw] bg-purple-base"
+        disabled={isRegistering || isConfirming || isUploading || !isConnected}
+        className="cursor-pointer w-[37.5vw] flex flex-row aspect-[408/36] justify-center items-center rounded-[0.556vw] bg-purple-base disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <p className="text-[0.972vw] text-white font-jakarta text-white-lighter">
-          Create
+          {isUploading || isRegistering
+            ? "Uploading..."
+            : isConfirming
+            ? "Confirming..."
+            : !isConnected
+            ? "Connect Wallet"
+            : "Create"}
         </p>
       </button>
+
+      {transactionHash && (
+        <p className="text-white text-[0.833vw]">
+          Transaction Hash: {transactionHash}
+        </p>
+      )}
     </div>
   );
 }

@@ -6,11 +6,15 @@ import { RiArrowRightUpLine } from "@remixicon/react";
 import { FiSkipBack, FiSkipForward } from "react-icons/fi";
 import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
 import ArtistProfileExpanded from "./ArtistProfileExpanded";
+import CreateCampaignModal from "./CreateCampaignModal";
 import { listMusic, MusicData } from "@/app/services/musicApi";
+import { useAccount } from "wagmi";
+import { useCrowdfundingPool, useGetCampaignByToken } from "@/app/hooks/useCrowdfundingPool";
 
 interface MusicPoolProps {
   title?: string;
   onClickLanjut?: () => void;
+  showCampaignButton?: boolean; // Show "Buat Pool Pendanaan" button (only for musicians)
 }
 
 interface MusicProps {
@@ -78,7 +82,8 @@ const DummyMusic: MusicProps[] = [
   },
 ];
 
-const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
+const MusicPool = ({ title = "Top Lagu Anda", showCampaignButton = false }: MusicPoolProps) => {
+  const { isConnected } = useAccount();
   const [activeSongId, setActiveSongId] = useState<number | null>(null);
   const [activeSong, setActiveSong] = useState<MusicProps | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -86,6 +91,8 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
   const [duration, setDuration] = useState(0);
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
   const [musicList, setMusicList] = useState<MusicProps[]>(DummyMusic);
+  const [showCampaignModal, setShowCampaignModal] = useState(false);
+  const [selectedMusicForCampaign, setSelectedMusicForCampaign] = useState<MusicProps | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Generate random closing hours
@@ -203,6 +210,15 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
     return `${hours} jam`;
   };
 
+  const handleCreateCampaign = (music: MusicProps) => {
+    if (!isConnected) {
+      alert("Please connect your wallet to create a campaign");
+      return;
+    }
+    setSelectedMusicForCampaign(music);
+    setShowCampaignModal(true);
+  };
+
   return (
     <>
       <section className="flex flex-col w-[75vw] gap-[1.111vw]">
@@ -228,24 +244,39 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
                 onClickPlay={() => handleTogglePlay(music)}
                 coverImageUrl={music.coverImageUrl}
               />
-              <div className="cursor-pointer flex flex-row justify-between text-start">
-                <div className="flex flex-col gap-[0.333vw]">
-                  <p className="text-white font-jakarta text-[1.111vw] font-[700]">
-                    {music.musicTitle}
-                  </p>
-                  <p className="text-white font-jakarta text-[0.833vw] font-regular">
-                    Pool tutup: {formatCloseTime(music.musicCloseHour)}
-                  </p>
+              <div className="cursor-pointer flex flex-col gap-[0.556vw]">
+                <div className="flex flex-row justify-between text-start">
+                  <div className="flex flex-col gap-[0.333vw]">
+                    <p className="text-white font-jakarta text-[1.111vw] font-[700]">
+                      {music.musicTitle}
+                    </p>
+                    <p className="text-white font-jakarta text-[0.833vw] font-regular">
+                      Pool tutup: {formatCloseTime(music.musicCloseHour)}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setActiveSong(music);
+                      setIsProfileExpanded(true);
+                    }}
+                    className="cursor-pointer w-[1.667vw] aspect-[24/24] flex justify-center bg-black rounded-[1.042vw]"
+                  >
+                    <RiArrowRightUpLine color="white" size={24} />
+                  </button>
                 </div>
-                <button
-                  onClick={() => {
-                    setActiveSong(music);
-                    setIsProfileExpanded(true);
-                  }}
-                  className="cursor-pointer w-[1.667vw] aspect-[24/24] flex justify-center bg-blackrounded-[1.042vw]"
-                >
-                  <RiArrowRightUpLine color="white" size={24} />
-                </button>
+
+                {/* Create Funding Pool Button - Only for Musicians */}
+                {showCampaignButton && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCreateCampaign(music);
+                    }}
+                    className="w-full bg-purple-base text-white text-[0.833vw] font-semibold py-[0.444vw] px-[0.778vw] rounded-[0.444vw] hover:bg-purple-600 transition-colors"
+                  >
+                    Buat Pool Pendanaan
+                  </button>
+                )}
               </div>
             </div>
           ))}
@@ -260,6 +291,22 @@ const MusicPool = ({ title = "Top Lagu Anda" }: MusicPoolProps) => {
           coverImageUrl={activeSong.coverImageUrl}
           genre={activeSong.genre}
           onClose={() => setIsProfileExpanded(false)}
+        />
+      )}
+
+      {/* Create Campaign Modal */}
+      {showCampaignModal && selectedMusicForCampaign && (
+        <CreateCampaignModal
+          tokenId={selectedMusicForCampaign.musicId}
+          musicTitle={selectedMusicForCampaign.musicTitle}
+          onClose={() => {
+            setShowCampaignModal(false);
+            setSelectedMusicForCampaign(null);
+          }}
+          onSuccess={() => {
+            // Refresh music list or show success message
+            console.log("Campaign created successfully!");
+          }}
         />
       )}
 
