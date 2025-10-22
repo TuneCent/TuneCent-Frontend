@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <section className="w-full flex flex-col gap-[1.528vw] justify-center items-center relative">
       {/* Background decorative element from Figma */}
-      <div className="absolute top-[8.333vw] left-0 w-full h-[21.181vw] pointer-events-none overflow-hidden">
+      <div className="absolute top-[12vw] left-0 w-full h-[21.181vw] pointer-events-none overflow-hidden">
         <Image
           src="https://figma-alpha-api.s3.us-west-2.amazonaws.com/images/a25fd05f-6be1-437f-a7c1-26948d65c3db"
           alt="Abstract background waves"
