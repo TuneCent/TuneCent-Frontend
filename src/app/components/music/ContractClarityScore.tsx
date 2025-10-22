@@ -10,17 +10,17 @@ const ContractClarityScoreArray: ContractClarityScoreProps[] = [
   {
     contractIcon: "",
     contractName: "Audit Smart Contract",
-    contractAddress: "XXXXXX",
+    contractAddress: "0xD10c657Cad43cC213bD1a69e602Ee46359B209D6",
   },
   {
     contractIcon: "",
     contractName: "Risk Score",
-    contractAddress: "XXXXXX",
+    contractAddress: "0x0C32B07D938D07eb5c62c7aba95F652dDa23A901",
   },
   {
     contractIcon: "",
     contractName: "Simulasi Payout",
-    contractAddress: "XXXXXX",
+    contractAddress: "0x1cfeB8a7FfD5268c488a8ee6E8BBdcc20aD263c4",
   },
 ];
 
@@ -45,9 +45,12 @@ const ContractClarityScore = () => {
       </p>
       <div className="flex flex-col w-full aspect-[481/180] gap-[0.333vw]">
         {ContractClarityScoreArray.map((contractKey) => (
-          <div
+          <a
             key={contractKey.contractName}
-            className="w-full flex flex-row justify-between p-[0.222vw]"
+            href={`https://sepolia.basescan.org/address/${contractKey.contractAddress}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex flex-row justify-between p-[0.222vw] hover:bg-neutral-black-base/50 rounded-[0.278vw] transition-colors duration-200 cursor-pointer"
           >
             <div className="w-full flex flex-row justify-between items-center">
               <div className="flex flex-row items-center gap-[0.667vw] font-jakarta text-neutral-white-base">
@@ -63,11 +66,11 @@ const ContractClarityScore = () => {
                   </p>
                 </div>
               </div>
-              <button onClick={() => {}} className="cursor-pointer">
+              <div className="cursor-pointer">
                 <ArrowUpRight size={24} color="white" />
-              </button>
+              </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>

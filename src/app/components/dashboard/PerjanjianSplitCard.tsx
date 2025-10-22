@@ -1,7 +1,9 @@
 import { ArrowUpRight } from "react-feather";
 
 const PerjanjianSplitCard = () => {
-  const lihatBuktiKode = () => {};
+  const lihatBuktiKode = () => {
+    window.open('https://sepolia.basescan.org/address/0xD10c657Cad43cC213bD1a69e602Ee46359B209D6', '_blank');
+  };
 
   return (
     <div className="w-full flex flex-col aspect-[1040/299] bg-neutral-black-base p-[1.111vw] gap-[1.111vw]">
@@ -10,7 +12,7 @@ const PerjanjianSplitCard = () => {
           Perjanjian Split 10% terkunci
         </h5>
         <p className="text-[0.972vw] font-jakarta text-white font-regular">
-          XXXXXX
+          0xD10c657Cad43cC213bD1a69e602Ee46359B209D6
         </p>
       </div>
       <div className="w-full flex flex-row gap-[1.111vw] justify-between">

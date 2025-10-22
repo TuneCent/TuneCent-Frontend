@@ -1,17 +1,48 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { usePrivy } from "@privy-io/react-auth";
 import AddressCard from "./AddressCard";
 import TotalDana from "./TotalDana";
 import AddIcon from "@mui/icons-material/Add";
 
 const HeroDashboard = () => {
   const router = useRouter();
+  const { user } = usePrivy();
+
+  // Extract name from email (part before @)
+  const getUserName = () => {
+    if (user?.email?.address) {
+      const emailName = user.email.address.split('@')[0];
+      // Capitalize first letter
+      return emailName.charAt(0).toUpperCase() + emailName.slice(1);
+    }
+    return "User";
+  };
+
+  // Mock transaction data
+  const mockTransactions = [
+    {
+      title: "Royalty Payment - Spotify",
+      address: "0xD10c...9D6",
+      link: "https://sepolia.basescan.org/tx/0x1234567890abcdef"
+    },
+    {
+      title: "Investment Return",
+      address: "0x742d...A3E",
+      link: "https://sepolia.basescan.org/tx/0xabcdef1234567890"
+    },
+    {
+      title: "Pool Distribution",
+      address: "0x8B5C...2F1",
+      link: "https://sepolia.basescan.org/tx/0xfedcba0987654321"
+    }
+  ];
 
   return (
     <section className="flex flex-col gap-[2.222vw] w-[75vw] ">
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col">
-          <p className="text-[2.222vw] font-bold text-white">Hi Bryan!</p>
+          <p className="text-[2.222vw] font-bold text-white">Hi {getUserName()}!</p>
           <p className="text-[1.389vw] text-white">
             Look at your update and progress portfolio
           </p>
@@ -65,8 +96,13 @@ const HeroDashboard = () => {
               Lihat Riwayat Payout
             </p>
           </div>
-          {[1, 2, 3].map((key: number) => (
-            <AddressCard key={key} />
+          {mockTransactions.map((transaction, index) => (
+            <AddressCard
+              key={index}
+              addressTitle={transaction.title}
+              address={transaction.address}
+              onDetail={() => window.open(transaction.link, '_blank')}
+            />
           ))}
         </div>
       </div>
