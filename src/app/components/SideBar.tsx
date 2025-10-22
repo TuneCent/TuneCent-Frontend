@@ -25,7 +25,7 @@ const SideBarMenuUser: SideBarMenuProps[] = [
   { id: 1, menu: "Home", icon: "asdks", link: "home" },
   { id: 2, menu: "Search", icon: "asdks", link: "search" },
   { id: 3, menu: "Invest", icon: "asdks", link: "invest" },
-  { id: 4, menu: "Settings", icon: "asdks", link: "home" },
+  { id: 4, menu: "Settings", icon: "asdks", link: "settings" },
   { id: 5, menu: "Sign Out", icon: "asdks", link: "" },
 ];
 
@@ -45,7 +45,7 @@ const SideBar = ({ variant = "musician" }: SideBarProps) => {
   };
 
   return (
-    <div className="flex flex-col bg-neutral-black-base w-[17.222vw] px-[1.111vw] py-[1.667vw] gap-[2vw]">
+    <div className="fixed left-0 top-0 h-screen flex flex-col bg-neutral-black-base w-[17.222vw] px-[1.111vw] py-[1.667vw] gap-[2vw] overflow-y-auto">
       <div className="flex flex-row gap-[0.556vw] items-center">
         <div className="w-[4.167vw] aspect-[60/47] bg-black"></div>
         <div className="font-jakarta flex flex-col">

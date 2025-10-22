@@ -4,9 +4,9 @@ import ProfileRow from "../components/dashboard/ProfileRow";
 
 const MusicianLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section className="bg-black w-full flex flex-row min-h-screen">
+    <section className="bg-black w-full min-h-screen">
       <SideBar />
-      <div className="w-[80vw] flex flex-col px-[2.222vw] py-[1.111vw] gap-[1.111vw]">
+      <div className="ml-[17.222vw] w-[calc(100vw-17.222vw)] flex flex-col px-[2.222vw] py-[1.111vw] gap-[1.111vw]">
         <div className="w-full">
           <ProfileRow />
         </div>
