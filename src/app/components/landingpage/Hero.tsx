@@ -13,6 +13,7 @@ const Hero = () => {
         <br />
         Just you and your listeners on chain
       </p>
+      <div className="flex flex-row gap-[1.111vw]"></div>
     </section>
   );
 };

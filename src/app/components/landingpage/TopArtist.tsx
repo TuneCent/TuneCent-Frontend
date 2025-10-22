@@ -1,6 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
 import MusicPoolCard from "../dashboard/MusicPoolCard";
 import { RiArrowRightUpLine } from "react-icons/ri";
+import { getTopArtists, ArtistLeaderboardData } from "@/app/services/musicApi";
+import Image from "next/image";
 
 interface ArtistProps {
   artistId: number;
@@ -43,6 +46,59 @@ const DummyArtist: ArtistProps[] = [
 ];
 
 const TopArtist = () => {
+  const [artists, setArtists] = useState<ArtistProps[]>(DummyArtist);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Array of real musician images from public sources
+  const musicianImages = [
+    "https://picsum.photos/seed/musician1/400/400", // Artist 1
+    "https://picsum.photos/seed/musician2/400/400", // Artist 2
+    "https://picsum.photos/seed/musician3/400/400", // Artist 3
+    "https://picsum.photos/seed/musician4/400/400", // Artist 4
+    "https://picsum.photos/seed/musician5/400/400", // Artist 5
+  ];
+
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getTopArtists({ limit: 5 });
+
+        if (response.leaderboard.length > 0) {
+          // Transform backend data to ArtistProps
+          const transformedArtists: ArtistProps[] = response.leaderboard.map(
+            (artist: ArtistLeaderboardData, index: number) => ({
+              artistId: artist.rank,
+              artistProfileIcon: musicianImages[index % musicianImages.length],
+              artistName: artist.display_name,
+              artistDesc: `${artist.tier} • ${artist.total_works} works`,
+            })
+          );
+          setArtists(transformedArtists);
+        } else {
+          // Use dummy data with real images if no backend data
+          const dummyWithImages = DummyArtist.map((artist, index) => ({
+            ...artist,
+            artistProfileIcon: musicianImages[index % musicianImages.length],
+          }));
+          setArtists(dummyWithImages);
+        }
+      } catch (error) {
+        console.error("Failed to fetch top artists:", error);
+        // Use dummy data with real images on error
+        const dummyWithImages = DummyArtist.map((artist, index) => ({
+          ...artist,
+          artistProfileIcon: musicianImages[index % musicianImages.length],
+        }));
+        setArtists(dummyWithImages);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchArtists();
+  }, []);
+
   return (
     <section className="flex flex-col w-[75vw] gap-[1.111vw]">
       <div className="flex flex-row justify-between items-end">
@@ -56,24 +112,33 @@ const TopArtist = () => {
       </div>
       <div className="w-full flex flex-row justify-center rounded-[1.042vw] bg-neutral-400 text-white"></div>
       <div className="flex flex-row gap-[2.667vw]">
-        {DummyArtist.map((key) => (
+        {artists.map((artist) => (
           <button
             onClick={() => {}}
-            key={key.artistId}
+            key={artist.artistId}
             className="cursor-pointer flex flex-col gap-[1.111vw]"
           >
             <div className="flex flex-col w-[13.333vw] aspect-[192/192]">
-              <div className="bg-[#D9D9D9] aspect-[192/192] flex flex-row-reverse p-[0.111vw] rounded-full">
-                <div className="flex flex-row gap-[0.333vw] p-[0.556vw]"></div>
+              <div className="bg-[#D9D9D9] aspect-[192/192] flex flex-row-reverse p-[0.111vw] rounded-full overflow-hidden relative">
+                {artist.artistProfileIcon && (
+                  <Image
+                    src={artist.artistProfileIcon}
+                    alt={artist.artistName}
+                    fill
+                    className="object-cover rounded-full"
+                    unoptimized
+                  />
+                )}
+                <div className="flex flex-row gap-[0.333vw] p-[0.556vw] relative z-10"></div>
               </div>
             </div>
             <div className="flex flex-row justify-between">
-              <div className="flex flex-col gap-[0.333vw]">
-                <p className="text-start text-white font-jakarta text-[1.111vw] font-[700]">
-                  {key.artistName}
+              <div className="flex flex-col gap-[0.333vw] text-start">
+                <p className="text-white font-jakarta text-[1.111vw] font-[700]">
+                  {artist.artistName}
                 </p>
                 <p className="text-white font-jakarta text-[0.833vw] font-regular">
-                  {key.artistDesc}
+                  {artist.artistDesc}
                 </p>
               </div>
               <div className="cursor-pointer w-[1.667vw] aspect-[24/24] flex justify-center bg-blackrounded-[1.042vw]">
