@@ -34,6 +34,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Tenxi",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/mejikuhibiniu.mp3",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e024d265eb3c717ab45470fdc8c",
+    genre: "Indie Pop",
   },
   {
     musicId: 2,
@@ -42,6 +44,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Perunggu",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/pikiran-yang-matang.mp3",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0292aaadd0be503d89c082ecbb",
+    genre: "Alternative Rock",
   },
   {
     musicId: 3,
@@ -50,6 +54,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Rizky Febian, Adrian Khalif",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/alamak.mp3",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0201b9750a33d771645d7f043a",
+    genre: "Pop",
   },
   {
     musicId: 4,
@@ -58,6 +64,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Hindia",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/kids-hindia.mp3",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0205898628baab6ef07a0a4d03",
+    genre: "Indie",
   },
   {
     musicId: 5,
@@ -66,6 +74,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Silet Open Up, Jacson Zeran, Juan Reza, Diva Aurel",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/tabola-bale.mp3",
+    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0210df7b8e9b3ed2588888a8ae",
+    genre: "Hip Hop",
   },
 ];
 

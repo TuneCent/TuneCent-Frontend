@@ -51,11 +51,11 @@ const TopArtist = () => {
 
   // Array of real musician images from public sources
   const musicianImages = [
-    "https://picsum.photos/seed/musician1/400/400", // Artist 1
-    "https://picsum.photos/seed/musician2/400/400", // Artist 2
-    "https://picsum.photos/seed/musician3/400/400", // Artist 3
-    "https://picsum.photos/seed/musician4/400/400", // Artist 4
-    "https://picsum.photos/seed/musician5/400/400", // Artist 5
+    "https://i.scdn.co/image/ab6761670000ecd4f9b12d75b1acc87fda216bbf", // Artist 1
+    "https://i.scdn.co/image/ab67616d000048517cd329ea4a204a8a47caf3d5", // Artist 2
+    "https://i.scdn.co/image/ab676161000051742017fda314b1745c3e96e0d5", // Artist 3
+    "https://i.scdn.co/image/ab67616d00001e0246f02ffc0922f939ed0fd53f", // Artist 4
+    "https://i.scdn.co/image/ab67616d00001e02d58121433ea3e6c4822ac494", // Artist 5
   ];
 
   useEffect(() => {
