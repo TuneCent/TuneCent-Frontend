@@ -60,8 +60,8 @@ const NFTList = () => {
             <FiLock size={12} color="white" />
             <p className="font-jakarta text-white text-[0.822vw] font-[500]">
               {dataKey.chronosLockActive === true
-                ? "Chronos Lock Aktif"
-                : "Chronos Lock Tidak Aktif"}
+                ? "Chronos Lock is Active"
+                : "Chronos Lock is Inactive"}
             </p>
           </div>
         </div>

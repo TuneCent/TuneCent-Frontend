@@ -9,7 +9,7 @@ export default function DashboardMusisi() {
 
       <MusicPool showCampaignButton={true} />
 
-      <MusicPool title="Pool yang didanai" showCampaignButton={true} />
+      <MusicPool title="Funding Pool" showCampaignButton={true} />
       <SmartContractAudit isLanding={false} />
     </section>
   );

@@ -6,12 +6,12 @@ const PerbandinganROI = () => {
   return (
     <div className="w-full flex flex-col p-[0.778vw] bg-neutral-black-base gap-[0.889vw]">
       <p className="text-white font-bold font-jakarta text-[1.111vw]">
-        Perbandingan
+        Comparison
       </p>
       <div className="w-full bg-[#8B609B] aspect-[570/9]"></div>
       <div className="w-full flex flex-row justify-between">
         <p className="text-[0.972vw] font-regular text-white font-jakarta">
-          Rata Rata ROI Industri
+          ROI Industry Average
         </p>
         <div className="flex flex-row gap-[0.556vw]">
           <p className="text-[0.972vw] text-[#FFFEFF]">65%</p>
@@ -33,7 +33,7 @@ const PerbandinganROI = () => {
       >
         <ArrowUpRight size={20} />
         <p className="font-jakarta font-medium text-[0.972vw]">
-          Lihat Semua di Riwayat Pembayaran Pool
+          Show All in Pool History
         </p>
       </button>
     </div>
