@@ -20,6 +20,17 @@ layout:
 
 ***
 
+This Project is built on Flow and here are the Contract Addresses :
+
+Contract Addresses:
+  -------------------------------------------
+  MusicRegistry:       https://evm-testnet.flowscan.io/address/0x3bf7d28199227E5426CB2c42AcBF351333DB68b3
+  ReputationScore:     https://evm-testnet.flowscan.io/address/0xC0BFbD90Ad1a66e7697Bd01F2479D31D9Cd74eA0
+  RoyaltyDistributor:  https://evm-testnet.flowscan.io/address/0xc36A4D32b0907D094330693C608B0CEc075F3d36
+  CrowdfundingPool:    https://evm-testnet.flowscan.io/address/0xf9121BD1B04b1F150240299bBf34532407402F3E
+
+
+
 ### 🎵 **Welcome to TuneCent Documentation**
 
 **Because Every Tune Deserves Every Cent.**
