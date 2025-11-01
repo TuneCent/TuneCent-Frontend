@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
+description: Welcome to your team’s developer platform
+layout:
+  width: wide
+  title:
+    visible: false
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: false
+  metadata:
+    visible: true
+---
 
-## Getting Started
+# TuneCent Documentation
 
-First, run the development server:
+***
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This Project is built on Flow and here are the Contract Addresses :
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Contract Addresses:
+  -------------------------------------------
+  MusicRegistry:       https://evm-testnet.flowscan.io/address/0x3bf7d28199227E5426CB2c42AcBF351333DB68b3
+  ReputationScore:     https://evm-testnet.flowscan.io/address/0xC0BFbD90Ad1a66e7697Bd01F2479D31D9Cd74eA0
+  RoyaltyDistributor:  https://evm-testnet.flowscan.io/address/0xc36A4D32b0907D094330693C608B0CEc075F3d36
+  CrowdfundingPool:    https://evm-testnet.flowscan.io/address/0xf9121BD1B04b1F150240299bBf34532407402F3E
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+### 🎵 **Welcome to TuneCent Documentation**
 
-To learn more about Next.js, take a look at the following resources:
+**Because Every Tune Deserves Every Cent.**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+In a world where creativity fuels culture, too many artists remain unheard — and underpaid. Their music is played everywhere but they don't get their own rights (royalties). Many artists is hard to survive because of that. **TuneCent** was born to change that.\
+We are building a **decentralized music ecosystem** that  change how artists gonna be appreciated without giving more charge for the listeners. Out platform will empowers creators, connects fans directly to their favorite artists, and redefines how music value is shared across the world.
+WS
+***
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### 🚀 **What You'll Find Here**
 
-## Deploy on Vercel
+This documentation is your guide to the TuneCent universe — from the **technical architecture** that powers our blockchain-driven royalties, to the **economic and social impact** of democratizing the music industry.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Whether you're an **artist**, **developer**, **investor**, or **creative policymaker**, this guide will help you understand how TuneCent works, why it matters, and how you can be part of reshaping the future of creative ownership.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="image">Cover image</th></tr></thead><tbody><tr><td>🎵</td><td><strong>How it works</strong></td><td>Learn how TuneCent decentralizes royalties and empowers creators.</td><td><a href="/docs/how-tunecent-works.md">how-tunecent-works.md</a></td><td><a href=".gitbook/assets/no-code.jpg">no-code.jpg</a></td></tr><tr><td>⚙️</td><td><strong>Architecture Overview</strong></td><td>Explore the technical foundation of our blockchain systems.</td><td><a href="/docs/architecture-overview.md">architecture-overview.md</a></td><td><a href=".gitbook/assets/hosted.jpg">hosted.jpg</a></td></tr><tr><td>💰</td><td><strong>Tokenomics</strong></td><td>Understand the economics behind TuneCent’s ecosystem and creator tokens.</td><td><a href="/docs/tokenomics.md">tokenomics.md</a></td><td><a href=".gitbook/assets/api-reference.jpg">api-reference.jpg</a></td></tr><tr><td>🌍</td><td><strong>Social &#x26; Economic Impact</strong></td><td>Discover how TuneCent creates jobs and drives creative growth.</td><td><a href="social-and-economic-impact.md">social-and-economic-impact.md</a></td><td><a href=".gitbook/assets/no-code.jpg">no-code.jpg</a></td></tr></tbody></table>
+
+<h2 align="center">Join us at TuneCent and Participate to your Favorite Artist Success!</h2>

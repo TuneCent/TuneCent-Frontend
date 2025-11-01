@@ -17,24 +17,24 @@ const HeroTransaction = () => {
       </div>
       <div className="flex flex-col w-full gap-[0.333vw]">
         <p className="font-jakarta font-bold text-[1.389vw] text-white">
-          Royalti Anda Dijamin oleh Kode
+          Your Royalty is guaranteed by Code.
         </p>
         <p className="font-jakarta text-[0.972vw] text-white">
-          Perjanjian ini diverifikasi langsung oleh Smart Contract Publik
+          This Royalty Aggrement was directly verified by Public Smart Contract
         </p>
         <PerjanjianSplitCard />
       </div>
       <div className="flex flex-col w-full gap-[0.333vw]">
         <p className="font-jakarta font-bold text-[1.389vw] text-white">
-          Simulasi Pendapatan dari Pool Sebelumnya
+          Previous Earning Simulation
         </p>
         <p className="font-jakarta text-[0.972vw] text-white">
-          Perjanjian ini diverifikasi langsung oleh Smart Contract Publik
+          This Royalty Aggrement was directly verified by Public Smart Contract
         </p>
         <PerbandinganROI />
         <div className="flex flex-row justify-center text-[0.972vw] font-jakarta text-white">
-          <p className="font-regular">Bukti Kode Tidak Dapat Diubah - </p>
-          <p className="font-bold"> &nbsp;Smart Contract Sebagai Otoritas</p>
+          <p className="font-regular">The Proof Code cannot be changed</p>
+          <p className="font-bold"> &nbsp;Smart Contract As An Authority</p>
         </div>
       </div>
     </div>

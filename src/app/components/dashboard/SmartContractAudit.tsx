@@ -15,10 +15,10 @@ const SmartContractAudit = ({ isLanding = true }: SmartContractAuditProps) => {
       )}
       <div className="flex flex-col w-full gap-[0.333vw]">
         <p className="font-jakarta font-bold text-[1.389vw] text-white">
-          Royalti Anda Dijamin oleh Kode
+          Your Royalty is guaranteed by Code.
         </p>
         <p className="font-jakarta text-[0.972vw] text-white">
-          Perjanjian ini diverifikasi langsung oleh Smart Contract Publik
+          This Royalty Aggrement was directly verified by Public Smart Contract.
         </p>
         <PerjanjianSplitCard />
       </div>

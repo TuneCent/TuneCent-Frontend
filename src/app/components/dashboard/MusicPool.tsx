@@ -9,7 +9,10 @@ import ArtistProfileExpanded from "./ArtistProfileExpanded";
 import CreateCampaignModal from "./CreateCampaignModal";
 import { listMusic, MusicData } from "@/app/services/musicApi";
 import { useAccount } from "wagmi";
-import { useCrowdfundingPool, useGetCampaignByToken } from "@/app/hooks/useCrowdfundingPool";
+import {
+  useCrowdfundingPool,
+  useGetCampaignByToken,
+} from "@/app/hooks/useCrowdfundingPool";
 
 interface MusicPoolProps {
   title?: string;
@@ -37,7 +40,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Tenxi",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/mejikuhibiniu.mp3",
-    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e024d265eb3c717ab45470fdc8c",
+    coverImageUrl:
+      "https://i.scdn.co/image/ab67616d00001e024d265eb3c717ab45470fdc8c",
     genre: "Indie Pop",
   },
   {
@@ -47,7 +51,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Perunggu",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/pikiran-yang-matang.mp3",
-    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0292aaadd0be503d89c082ecbb",
+    coverImageUrl:
+      "https://i.scdn.co/image/ab67616d00001e0292aaadd0be503d89c082ecbb",
     genre: "Alternative Rock",
   },
   {
@@ -57,7 +62,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Rizky Febian, Adrian Khalif",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/alamak.mp3",
-    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0201b9750a33d771645d7f043a",
+    coverImageUrl:
+      "https://i.scdn.co/image/ab67616d00001e0201b9750a33d771645d7f043a",
     genre: "Pop",
   },
   {
@@ -67,7 +73,8 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Hindia",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/kids-hindia.mp3",
-    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0205898628baab6ef07a0a4d03",
+    coverImageUrl:
+      "https://i.scdn.co/image/ab67616d00001e0205898628baab6ef07a0a4d03",
     genre: "Indie",
   },
   {
@@ -77,12 +84,16 @@ const DummyMusic: MusicProps[] = [
     musicArtist: "Silet Open Up, Jacson Zeran, Juan Reza, Diva Aurel",
     musicOnClick: () => {},
     musicUrl: "/assets/songs/tabola-bale.mp3",
-    coverImageUrl: "https://i.scdn.co/image/ab67616d00001e0210df7b8e9b3ed2588888a8ae",
+    coverImageUrl:
+      "https://i.scdn.co/image/ab67616d00001e0210df7b8e9b3ed2588888a8ae",
     genre: "Hip Hop",
   },
 ];
 
-const MusicPool = ({ title = "Top Lagu Anda", showCampaignButton = false }: MusicPoolProps) => {
+const MusicPool = ({
+  title = "Your Top Song",
+  showCampaignButton = false,
+}: MusicPoolProps) => {
   const { isConnected } = useAccount();
   const [activeSongId, setActiveSongId] = useState<number | null>(null);
   const [activeSong, setActiveSong] = useState<MusicProps | null>(null);
@@ -92,7 +103,8 @@ const MusicPool = ({ title = "Top Lagu Anda", showCampaignButton = false }: Musi
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
   const [musicList, setMusicList] = useState<MusicProps[]>(DummyMusic);
   const [showCampaignModal, setShowCampaignModal] = useState(false);
-  const [selectedMusicForCampaign, setSelectedMusicForCampaign] = useState<MusicProps | null>(null);
+  const [selectedMusicForCampaign, setSelectedMusicForCampaign] =
+    useState<MusicProps | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Generate random closing hours
@@ -251,7 +263,7 @@ const MusicPool = ({ title = "Top Lagu Anda", showCampaignButton = false }: Musi
                       {music.musicTitle}
                     </p>
                     <p className="text-white font-jakarta text-[0.833vw] font-regular">
-                      Pool tutup: {formatCloseTime(music.musicCloseHour)}
+                      Pool Closed: {formatCloseTime(music.musicCloseHour)}
                     </p>
                   </div>
                   <button
@@ -274,7 +286,7 @@ const MusicPool = ({ title = "Top Lagu Anda", showCampaignButton = false }: Musi
                     }}
                     className="w-full bg-purple-base text-white text-[0.833vw] font-semibold py-[0.444vw] px-[0.778vw] rounded-[0.444vw] hover:bg-purple-600 transition-colors"
                   >
-                    Buat Pool Pendanaan
+                    Create Pool Funding
                   </button>
                 )}
               </div>

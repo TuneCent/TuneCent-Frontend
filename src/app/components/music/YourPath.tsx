@@ -28,13 +28,16 @@ const YourPath = () => {
               {mockProgress.currentLevel}
             </p>
             <p className="font-jakarta font-regular text-[0.833vw] text-white">
-              {mockProgress.currentWorks}/{mockProgress.totalWorksForNextLevel} karya terdaftar di blockchain
+              {mockProgress.currentWorks}/{mockProgress.totalWorksForNextLevel}{" "}
+              creation registered on blockchain
             </p>
           </div>
         </div>
         <div className="flex flex-col font-jakarta text-end">
           <p className="text-[0.833vw] text-[#FFFEFF]">Final Goal</p>
-          <p className="text-[1.111vw] text-[#FFFEFF]">{mockProgress.finalGoal}</p>
+          <p className="text-[1.111vw] text-[#FFFEFF]">
+            {mockProgress.finalGoal}
+          </p>
         </div>
       </div>
     </div>
